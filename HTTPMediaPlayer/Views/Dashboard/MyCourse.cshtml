@@ -1,0 +1,699 @@
+﻿@model HTTPMediaPlayer.Models.UserCourse
+
+@{
+  ViewBag.Title = "Index";
+  Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<link href="~/Content/css/videopage.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/dashboard/css/font.css">
+
+@using (HTTPMediaPlayer.Models.DB.videodbEntities db = new HTTPMediaPlayer.Models.DB.videodbEntities())
+{
+    HTTPMediaPlayer.Models.DB.vd_UserCourses myUserCourse = db.vd_UserCourses.FirstOrDefault(ul => ul.vd_Users.Id == Model.userid && ul.CourseId == Model.courseid);
+    if (myUserCourse != null) //RedirectToAction("Index");
+    {
+  <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9 nopadding">
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-9 nopadding">
+                @*<video controls src="~/english-breakfast-5.mp4">
+                    Your browser does not support the video tag.
+                </video>*@
+                <div class="videocontainer">
+                    <div class="maincontainer">
+
+                        <span id="bufferization-value"></span>
+                        <div class="vidcontainer">
+                            <video oncontextmenu="return false;" id="myvid">
+                                Your browser does not support the video tag.
+                            </video>
+
+
+                            @*<div class="ads">
+                        <span class="closeme fa fa-close"></span>
+
+                    </div>*@
+                            <div class="bigplay" title="play the video"><i class="fa fa-play-circle-o"></i></div>
+                            <div class="loading"><i class="fa fa-spinner fa-pulse fa-3x fa-fw margin-bottom"></i></div>
+                            <div class="topControl">
+                                <div class="progressbar">
+                                    <span class="bufferBar"></span>
+                                    <span class="timeBar"></span>
+                                </div>
+                                <div class="time">
+                                    <span class="current"></span> /
+                                    <span class="duration"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controllers">
+
+                        <button type="submit" class="bt btnPlay" title="Play/Pause video"></button>
+
+
+                        <button class="bt prevvid disabled" title="Previous video"><i class="fa fa-step-forward fa-rotate-180"></i></button>
+                        <button class="bt nextvid" title="Next video"><i class="fa fa-step-forward"></i></button>
+                        <button class="bt sound sound2" title="Mute/Unmute sound"></button>
+                        <div class="h">
+                            <button class="bt btnFS " style="float:right" title="full screen"></button>
+                            <button class="bt btnspeed " style="float:right" title="Video speed"><i class="fa fa-gear"></i></button>
+                            <ul class="speedcnt">
+                                <li class="spdx1000">10</li>
+                                <li class="spdx700">7</li>
+                                <li class="spdx500">5</li>
+                                <li class="spdx300">3</li>
+                                <li class="spdx200">2</li>
+                                <li class="spdx50">1.5</li>
+                                <li class="spdx25">1.25</li>
+                                <li class="spdx1 selected">Normal</li>
+                                <li class="spdx050">0.5</li>
+                            </ul>
+                            <button class="bt btnLight lighton " style="float:right" title="on/off light"><i class="fa fa-lightbulb-o"></i></button>
+                        </div>
+                        <div class="volume" title="Set volume">
+                            <span class="volumeBar"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed courseheader" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    @myUserCourse.vd_Courses.Name
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <div class="card-body">
+                                    @Html.Raw(myUserCourse.vd_Courses.PageText)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading active" role="tab" id="heading3">
+                            <h4 class="panel-title">
+                                <a class="courseheader" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                                    Материалы
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="heading3">
+                            <div class="panel-body">
+                                <div id="lessonDesctiption" class="card-body">
+                                    @Html.Partial("_lessonDescription")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @*<button id="jump">Jump to 7</button>
+    <h3>@Model.vd_Courses.Name</h3>
+    <h4>@Model.vd_Courses.Description</h4>*@
+            </div>
+            <div class="col-md-3">
+                    <div id="videolist" class="videolist" >
+                        <nav id="vids" class="vids">
+                            @Html.Partial("_lessonsList") @* this is view with lessons table. Same view you will return from controller *@
+                        </nav>
+                    </div>
+                
+
+                <h3>Мои курсы</h3>
+                <div class="single-grid-right">                    @*GlobalModel.LoggedInUsers[Session["UserId"]].MyCourses.Count
+                                           id = user.vd_UserCourses.ToArray()[i].Id, userId = user.vd_UserCourses.ToArray()[i].UserId, courseId = user.vd_UserCourses.ToArray()[i].CourseId
+                            id = myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].Id }}*@
+                    @for (int i = 0; i < myUserCourse.vd_Users.vd_UserCourses.Count; i++)
+                    {
+                    <div class="single-right-grids">
+                        <div class="row">
+                            <div class="col-md-4 single-right-grid-left">
+                                <a href="@Url.Action("MyCourse", "Dashboard", new { id = myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].Id, userId = myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].UserId, courseId = myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].CourseId } )"><img src=@("../../Content/img/video/" + myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].vd_Courses.UrlName + ".jpg") alt="" /></a>
+                            </div>
+                            <div class="col-md-8 single-right-grid-right">
+                                <a href="@Url.Action("MyCourse", "Dashboard", new { id = myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].Id, userId = myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].UserId, courseId = myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].CourseId  })" class="title"> @myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].vd_Courses.Name</a>
+                                <p class="author"><a href="#" class="author">@myUserCourse.vd_Users.vd_UserCourses.ToArray()[i].vd_Courses.vd_Users.Name</a></p>
+                                @*<p class="views">2,114,200 views</p>*@
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    
+@section scripts {
+    <script type="text/javascript">
+    /* nice mp4 video playlist with jQuery
+       created by: Menni Mehdi
+       in : 23/01/2016
+       license : if you like it use it
+    */
+        var vid = $('#myvid');
+
+        function ShowBuffering()
+        {
+            setInterval(function() {
+                // Whatever you want to do after the wait
+                //display video buffering bar
+                if(vid[0].buffered.length>0){
+                        var range = 0;
+                        var bf = vid[0].buffered;
+                        var time = vid[0].currentTime;
+                        var maxduration = vid[0].duration;
+                        while(vid[0].buffered.length > range + 1 && !(bf.start(range) <= time && time <= bf.end(range))) {
+                            range += 1;
+                        }
+
+                        var loadStartPercentage = bf.start(range) / vid[0].duration;
+                        var loadEndPercentage = bf.end(range) / vid[0].duration;
+                        var loadPercentage = loadEndPercentage - loadStartPercentage;
+                        var leftPos = 100 * time / maxduration;
+
+                        $('.bufferBar').css('left', 0 + '%');
+                        $('.bufferBar').css('width', 100*(loadPercentage + (time / maxduration)) + '%');
+                    }
+            }, 500);
+        }
+
+    $(document).ready(function () {
+        setButtonsSize();
+        var volumeValue = 0.4;
+        //default video source
+        $(vid).attr("src", $("a.link:first").attr("href"));
+
+        // addClass playing to first video link
+        $("a.link:first").addClass("playing");
+
+        setLinks();
+        var lessonid = $("a.link:first").attr("data-lesson");
+        updateLessonDescription(lessonid);
+
+
+        //VIDEO EVENTS
+        //video canplay event
+        vid.on('canplay', function () {
+            $('.loading').fadeOut(100);
+        });
+
+        //video canplaythrough event
+        //solve Chrome cache issue
+        var completeloaded = false;
+        vid.on('canplaythrough', function () {
+            completeloaded = true;
+        });
+
+        //video ended event
+        vid.on('ended', function () {
+            $("this,.ads,.bigplay").fadeIn(200);
+            var currentvideotext = $(".playing").text();
+            $('.btnPlay').removeClass('paused');
+            vid[0].pause();
+            updateLessonList('end', currentvideotext);
+        });
+
+        //video seeking event
+        vid.on('seeking', function () {
+            //if video fully loaded, ignore loading screen
+            //alert('seeking');
+            if (!completeloaded) {
+                $("this,.ads,.bigplay").fadeOut(200);
+                $('.loading').fadeIn(200);
+            }
+            else
+            {
+                $('.loading').fadeOut(200);
+            }
+        });
+
+        //video seeked event
+        vid.on('seeked', function () {
+            //alert('seeked');
+            $('.loading').fadeOut(200);
+        });
+
+        //video waiting for more data event
+        vid.on('waiting', function () {
+            $("this,.ads,.bigplay").fadeOut(200);
+            $('.loading').fadeIn(200);
+        });
+
+        /*controllers*/
+        //before everything get started
+        vid.on('loadedmetadata', function () {
+            //set video properties
+            $('.current').text(timeFormat(0));
+            $('.duration').text(timeFormat(vid[0].duration));
+            if (vid[0].muted) {
+                updateVolume(0, 0);
+            } else {
+                updateVolume(0, volumeValue);
+            }
+            ShowBuffering();
+        });
+
+        //display current video play time
+        vid.on('timeupdate', function () {
+            var currentPos = vid[0].currentTime;
+            var maxduration = vid[0].duration;
+            var perc = 100 * currentPos / maxduration;
+            $('.timeBar').css('width', perc + '%');
+            $('.current').text(timeFormat(currentPos));
+        });
+
+        //CONTROLS EVENTS
+        //video screen and play button clicked
+        vid.on('click', function () { playpause(); });
+        $('.btnPlay').on('click', function () { playpause(); });
+        var playpause = function () {
+            if (vid[0].paused || vid[0].ended) {
+                $('.btnPlay').addClass('paused');
+                vid[0].play();
+                $("this,.ads,.bigplay").fadeOut(200);
+            }
+            else {
+                $("this,.ads,.bigplay").show();
+                $('.btnPlay').removeClass('paused');
+                vid[0].pause();
+            }
+        };
+
+        //VIDEO PROGRESS BAR
+        //when video timebar clicked
+        var timeDrag = false;   /* check for drag event */
+        $('.progressbar').on('mousedown', function (e) {
+            timeDrag = true;
+            updatebar(e.pageX);
+        });
+        $(document).on('mouseup', function (e) {
+            if (timeDrag) {
+                timeDrag = false;
+                updatebar(e.pageX);
+            }
+        });
+        $(document).on('mousemove', function (e) {
+            if (timeDrag) {
+                updatebar(e.pageX);
+            }
+        });
+        var updatebar = function (x) {
+            var progress = $('.progressbar');
+
+            //calculate drag position
+            //and update video currenttime
+            //as well as progress bar
+            var maxduration = vid[0].duration;
+            var position = x - progress.offset().left;
+
+            var percentage = 100 * position / progress.width();
+            if (percentage > 100) {
+                percentage = 100;
+            }
+            if (percentage < 0) {
+                percentage = 0;
+            }
+            $('.timeBar').css('width', percentage + '%');
+
+            vid[0].currentTime = maxduration * percentage / 100;
+        };
+
+        //sound button clicked
+        $('.sound').click(function () {
+            vid[0].muted = !vid[0].muted;
+            $(this).toggleClass('muted');
+            if (vid[0].muted) {
+                $('.volumeBar').css('width', 0);
+            }
+            else {
+                $('.volumeBar').css('width', vid[0].volume * 100 + '%');
+            }
+        });
+
+        //VOLUME BAR
+        //volume bar event
+        var volumeDrag = false;
+        $('.volume').on('mousedown', function (e) {
+            volumeDrag = true;
+            vid[0].muted = false;
+            $('.sound').removeClass('muted');
+            updateVolume(e.pageX);
+        });
+        $(document).on('mouseup', function (e) {
+            if (volumeDrag) {
+                volumeDrag = false;
+                updateVolume(e.pageX);
+            }
+        });
+        $(document).on('mousemove', function (e) {
+            if (volumeDrag) {
+                updateVolume(e.pageX);
+            }
+        });
+        var updateVolume = function (x, vol) {
+            volumeValue = vol;
+
+            var volume = $('.volume');
+            var percentage;
+            //if only volume have specificed
+            //then direct update volume
+            if (vol) {
+                percentage = vol * 100;
+            }
+            else {
+                var position = x - volume.offset().left;
+                percentage = 100 * position / volume.width();
+            }
+
+            if (percentage > 100) {
+                percentage = 100;
+            }
+            if (percentage < 0) {
+                percentage = 0;
+            }
+
+            //update volume bar and video volume
+            $('.volumeBar').css('width', percentage + '%');
+            vid[0].volume = percentage / 100;
+            volumeValue = percentage / 100;
+            //change sound icon based on volume
+            if (vid[0].volume == 0) {
+                $('.sound').removeClass('sound2').addClass('muted');
+            }
+            else if (vid[0].volume > 0.5) {
+                $('.sound').removeClass('muted').addClass('sound2');
+            }
+            else {
+                $('.sound').removeClass('muted').removeClass('sound2');
+            }
+
+        };
+
+        //speed text clicked
+        $('.spdx1000').on('click', function () { fastfowrd(this, 10); });
+        $('.spdx700').on('click', function () { fastfowrd(this, 7); });
+        $('.spdx500').on('click', function () { fastfowrd(this, 5); });
+        $('.spdx300').on('click', function () { fastfowrd(this, 3); });
+        $('.spdx200').on('click', function () { fastfowrd(this, 2); });
+        $('.spdx50').on('click', function () { fastfowrd(this, 1.5); });
+        $('.spdx25').on('click', function () { fastfowrd(this, 1.25); });
+        $('.spdx1').on('click', function () { fastfowrd(this, 1); });
+        $('.spdx050').on('click', function () { fastfowrd(this, 0.5); });
+        var fastfowrd = function (obj, spd) {
+            $("this,.ads,.bigplay").fadeOut(200);
+            $('.speedcnt li').removeClass('selected');
+            $(obj).addClass('selected');
+            vid[0].playbackRate = spd;
+            vid[0].play();
+            $("ul.speedcnt").fadeOut("fast");
+            $('.btnPlay').addClass('paused');
+        };
+        $(".btnspeed").click(function () {
+
+            $("ul.speedcnt").toggle("slide");//slideToggle(100);
+        });
+
+        //fullscreen button clicked
+        $('.btnFS').on('click', function () {
+            if ($.isFunction(vid[0].webkitEnterFullscreen)) {
+                vid[0].webkitEnterFullscreen();
+            }
+            else if ($.isFunction(vid[0].mozRequestFullScreen)) {
+                vid[0].mozRequestFullScreen();
+            }
+            else {
+                alert('Your browsers doesn\'t support fullscreen');
+            }
+        });
+
+        //light bulb button clicked
+        $('.btnLight').click(function () {
+            $(this).toggleClass('lighton');
+
+            //if lightoff, create an overlay
+            if (!$(this).hasClass('lighton')) {
+                $('body').append('<div class="overlay"></div>');
+                $('.overlay').css({
+                    'position': 'absolute',
+                    'width': 100 + '%',
+                    'height': $(document).height(),
+                    'background': '#000',
+                    'opacity': 0.9,
+                    'top': 0,
+                    'left': 0,
+                    'z-index': 999
+                });
+                $('.controllers').css({
+                    'background-color': '#000'
+                });
+                $('.videocontainer').css({
+                    'z-index': 1000
+                });
+            }
+                //if lighton, remove overlay
+            else {
+                $('.overlay').remove();
+                $('.controllers').css({
+                    'background-color': '#fff',
+                });
+            }
+        });
+
+        //hide pause button if video onplaying
+        //if (vid.onplaying = true) { $('.btnPlay').addClass('paused'); };
+
+
+        //previous video button
+        $(".prevvid").click(function () {
+
+            if ($("a.link:first").hasClass("playing"))
+            {
+                //alert('no prev');
+                return;
+            }
+            var currentvideotext = $(".playing").text();
+            var prevvideohref = $(".playing").prev().attr("href");
+            $(vid).attr("src", prevvideohref);
+            vid[0].play();
+            updateLessonList('prev', currentvideotext);
+        });
+
+        //previous video button
+        $(".nextvid").click(function () {
+            if ($("a.link:last").hasClass("playing")) {
+                //alert('no next');
+                return;
+            }
+            var currentvideotext = $(".playing").text();
+            var nextvideohref = $(".playing").next().attr("href");
+
+            $(vid).attr("src", nextvideohref);
+            vid[0].play();
+            updateLessonList('next', currentvideotext);
+        });
+
+        //Time format converter - 00:00
+        var timeFormat = function (seconds) {
+            var m = Math.floor(seconds / 60) < 10 ? "0" + Math.floor(seconds / 60) : Math.floor(seconds / 60);
+            var s = Math.floor(seconds - (m * 60)) < 10 ? "0" + Math.floor(seconds - (m * 60)) : Math.floor(seconds - (m * 60));
+            return m + ":" + s;
+        };
+        $(".closeme , .bigplay").click(function () {
+            $("this,.ads,.bigplay").fadeOut(200);
+            vid[0].play();
+            $('.btnPlay').addClass('paused');
+        });
+        //end
+    });
+
+    function updateLessonList(type, currentvideotext)
+    {
+        $.ajax({
+            url: "/Dashboard/GetUserCourse?userId=" + @myUserCourse.UserId + "&courseId=" + @myUserCourse.CourseId,
+            type: "GET",
+            success: function (result) {
+                setTimeout(function() {
+                    // Whatever you want to do after the wait
+                    //$("#videolist").removeClass("disabledbutton");
+                }, 1);
+            },
+            error: function (result) {
+                setTimeout(function() {
+                    // Whatever you want to do after the wait
+                    //$("#videolist").removeClass("disabledbutton");
+                }, 1);
+            },
+            statusCode: {
+                200: function (data) {
+                    // data = your partialview
+                    showLessonsList(data, currentvideotext, type);
+                },
+                401: function (data) {
+                    location.href = '@Url.Action("Index", "Dashboard", new { name = myUserCourse.vd_Users.UrlName})';
+                }
+            }
+        });
+    }
+
+        function updateLessonDescription(lessonid)
+        {
+            $.ajax({
+                url: "/Dashboard/GetLessonDescription?lessonid=" + lessonid + "&userid=" + @(Session["UserID"].ToString()),
+                type: "GET",
+                success: function (result) {
+                    //alert('changed');
+                },
+                error: function (result) {
+
+                },
+                statusCode: {
+                    200: function (data) {
+                        $("#lessonDesctiption").html(data);
+                    },
+                    401: function (data) {
+                        location.href = '@Url.Action("Index", "Dashboard", new { name = myUserCourse.vd_Users.UrlName})';
+                    }
+                }
+            });
+        }
+
+    function showLessonsList(partialViewResult, currentvideotext, type) {
+        $("#vids").html(partialViewResult);
+        setLinks();
+
+        // addClass playing to current video link
+        $("a.link:contains('" + currentvideotext + "')").addClass("playing");
+
+        if(type == 'next')
+        {
+            $(".playing").next().addClass("playing");
+            $(".playing:first").removeClass("playing");
+            $('.btnPlay').addClass('paused');
+            $("this,.ads,.bigplay").fadeOut(200);
+            $(".prevvid").removeClass("disabled");
+            if ($("a.link:last").hasClass("playing")) {
+                $(this).addClass("disabled");
+            } else {
+                $(this).removeClass("disabled");
+            };
+        }
+        if (type == 'prev') {
+            $(".playing").prev().addClass("playing");
+            $(".playing:last").removeClass("playing");
+            $('.btnPlay').addClass('paused');
+            $(".nextvid").removeClass("disabled");
+            if ($("a.link:first").hasClass("playing")) {
+                $(this).addClass("disabled");
+            } else {
+                $(this).removeClass("disabled");
+            };
+        }
+        if(type == 'end')
+        {
+            vid[0].load();
+            $(vid).attr("src", $("a.link.playing").attr("href"));
+        }
+    }
+
+    function setLinks()
+    {
+        $("a.link").on("click", function (event) {
+            // prevent link default
+            event.preventDefault();
+
+            $("this,.ads,.bigplay").fadeOut(0);
+            var currentvideotext = $(".playing").text();
+            var newvideotext = $(this).text();
+            //$(".btnPlay").click();
+            if (currentvideotext == newvideotext) {
+                return;
+            }
+
+            $("this,.ads,.bigplay").fadeOut(200);
+            // change video source
+            $(vid).attr("src", $(this).attr("href"));
+
+            // remouve class playing from unplayed video href
+            $(".vids a").removeClass("playing");
+
+            // add class playing to video href
+            $(this).addClass("playing");
+            var newvideotext = $(".playing").text();
+            // add class paused to give the play/pause button the right look
+            $('.btnPlay').addClass('paused');
+
+            // play the video
+            $("#videolist").addClass("disabledbutton");
+            vid[0].play();
+            vid[0].onloadeddata = function() {
+                //alert('!');
+                $("#videolist").removeClass("disabledbutton");
+            };
+
+            updateLessonList('type', newvideotext);
+            var lessonid = $(this).attr("data-lesson");
+            updateLessonDescription(lessonid);
+
+            // adjust prev button state
+            if ($("a.link:first").hasClass("playing")) {
+                $(".prevvid").addClass("disabled");
+            }
+            else {
+                $(".prevvid").removeClass("disabled");
+            }
+
+            // adjust next button state
+            if ($("a.link:last").hasClass("playing")) {
+                $(".nextvid").addClass("disabled");
+            }
+            else {
+                $(".nextvid").removeClass("disabled");
+            }
+
+        });
+    }
+</script>
+    <script>
+        $('.panel-collapse').on('show.bs.collapse', function () {
+            $(this).siblings('.panel-heading').addClass('active');
+        });
+
+        $('.panel-collapse').on('hide.bs.collapse', function () {
+            $(this).siblings('.panel-heading').removeClass('active');
+        });
+    </script>
+    <script>
+        $(window).resize(function() {
+            setButtonsSize();
+        });    
+
+        function setButtonsSize()
+        {
+            if($('.vidcontainer').width() < 450)
+            {
+                $('.controllers .bt').css('margin','2px').css('height','30px').css('width','30px');
+            }
+            else
+            {
+                $('.controllers .bt').css('margin','5px').css('height','40px').css('width','40px');
+            }
+
+        }
+    </script>
+}
+    }
+    else
+    {
+    @section scripts {}
+    }
+}
+

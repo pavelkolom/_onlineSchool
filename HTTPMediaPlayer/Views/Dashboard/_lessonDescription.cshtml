@@ -1,0 +1,14 @@
+﻿@model HTTPMediaPlayer.Models.UserCourse
+
+@using (HTTPMediaPlayer.Models.DB.videodbEntities db = new HTTPMediaPlayer.Models.DB.videodbEntities())
+{
+    var lesson = db.vd_Lessons.FirstOrDefault(f => f.Id == Model.lessonid);
+    if (lesson != null)
+    {
+        var text = lesson.Text;
+        if (text != null)
+        {
+            @Html.Raw(text)
+        }
+    }
+}

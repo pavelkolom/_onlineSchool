@@ -1,0 +1,58 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@using Microsoft.AspNetCore.Http
+
+@inject HTTPMediaPlayerCore.Services.ICourseService service
+
+@model HTTPMediaPlayerCore.Models.UserCourse
+
+@{
+  HTTPMediaPlayerCore.Models.Course course = await service.GetCourse(Model.CourseId);
+
+  List<HTTPMediaPlayerCore.Models.CourseLesson> lessons = await service.GetCourseLessons(Model.CourseId);
+
+  foreach (var item in lessons.OrderBy(l => l.OrderNumber))
+  {
+      Lesson lesson = await service.GetLesson(item.LessonId);
+      UserLesson x = await service.GetUserLesson(Model.CourseId, Model.UserId, item.LessonId);
+      File f = await service.GetFile(lesson.FileId);
+
+      if (x != null)
+      {
+
+          if (item.IsForTrial == true || (item.IsForTrial == false && Model.IsPaid == true))
+          {
+              if (Model.IsActivated && x.ActivationDate.Value < DateTime.Now)
+              {
+                  //if (course.IsBook != true)
+                  //{
+                        <a class="link" data-lesson="@(lesson.Id)" href=@(!String.IsNullOrEmpty(Context.Session.GetString("SessionID")) ? ("/api/sample/" + f.FileName + "/" + x.UniqueId.ToString()) + "/" + course.AuthorId + "/" + lesson.FileId + "/" + Model.UserId : "#")>
+                            @(lesson.Name)
+                            @if (x.IsReadByUser == true)
+                            {
+                                <i class="material-icons" style="color:white;">check</i>
+                            }
+                        </a>
+                  //}
+                    @*else
+                    {
+                        <a class="link" data-lesson="@(lesson.Id)" href=@(!String.IsNullOrEmpty(Context.Session.GetString("SessionID")) ? ("/api/sample/" + course.AuthorId + "/" + x.UniqueId.ToString()) : "#")>
+                            @(lesson.Name)
+                            @if (x.IsReadByUser == true)
+                            {
+                                <i class="material-icons" style="color:white;">check</i>
+                            }
+                        </a>
+                    }*@
+                }
+                else
+                {
+                    <a data-lesson="@(lesson.Id)" style="pointer-events: none;" href="#"><b>@(lesson.Name)</b><br /><small><i style="color:#ff8d00">@("Активация: " +x.ActivationDate.Value.Date.ToShortDateString() + " " + x.ActivationDate.Value.TimeOfDay)</i></small></a>
+                }
+            }
+            else
+            {
+                <a data-lesson="@(lesson.Id)" href="@Url.Action("Register", "Account",new { course = course.UrlName})"><b>@(lesson.Name)</b><br /><small><i style="color:#ff8d00">Требуется подписка на полный курс</i></small></a>
+            }
+        }
+    }
+}

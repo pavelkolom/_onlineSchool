@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Videos";
+}
+
+<h2>Videos</h2>
+
+@foreach(var item in HTTPMediaPlayer.Models.GlobalModel.UsersVideos)
+{
+  <div><span>@item.Key</span> : <span>@item.Value.UserLesson.Id</span> : <span>@item.Value.FileInfo.FullName</span></div><br />
+}
+

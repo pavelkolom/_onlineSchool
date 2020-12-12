@@ -1,0 +1,115 @@
+﻿@model IEnumerable<HTTPMediaPlayerCore.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container">
+    <div class="indexcontent">
+        <div class="recommended-info">
+            <h3>Квитанции</h3>
+        </div>
+        <p>
+            <a asp-action="Create">Создать новую квитанцию</a>
+        </p>
+        <table class="table" width="100%">
+            <thead>
+                <tr>
+                    <th>
+                        Создана
+                    </th>
+                    <th>
+                        Оплачена
+                    </th>
+                    <th>
+                        Сумма
+                    </th>
+                    <th>
+                        Сумма с комиссией
+                    </th>
+                    <th>
+                        Комиссия
+                    </th>
+                    <th>
+                        Метод платежа
+                    </th>
+                    <th>
+                        Тестовая
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Пользователь
+                    </th>
+                    <th>
+                        Создал
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td colspan="12">
+                        <b>
+                            Квитанция @Html.DisplayFor(modelItem => item.Id): @Html.DisplayFor(modelItem => item.Text)
+                        </b>
+                        <br />
+                        <b>
+                            @(item.IsPaid ? "Оплачена" : ("Ссылка на оплату: " + this.Context.Request.Scheme +
+                            "://" + this.Context.Request.Host.ToString() +
+                            "/Invoices/Pay/" + item.Id.ToString()))
+                        </b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentDateTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IncSum)
+                    </td>
+                    <td>
+                        @(item.IncSum - item.Sum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentMethod)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsTest)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EMail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedByUserId)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+
+
+

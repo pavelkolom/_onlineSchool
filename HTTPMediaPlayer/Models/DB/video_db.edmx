@@ -1,0 +1,1147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="videodbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="vd_ActionLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SessionId" Type="int" />
+          <Property Name="ActionType" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="Remarks" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vd_ActionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vd_Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RusName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EngName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Alpha2" Type="nvarchar" MaxLength="10" />
+          <Property Name="Alpha3" Type="nvarchar" MaxLength="10" />
+          <Property Name="ISO" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="vd_CourseLessons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="LessonId" Type="int" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" Nullable="false" />
+          <Property Name="IsForTrial" Type="bit" />
+        </EntityType>
+        <EntityType Name="vd_Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HasPackages" Type="bit" />
+          <Property Name="IsPackage" Type="bit" />
+          <Property Name="ParentCourseId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UrlName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="400" />
+          <Property Name="AuthorId" Type="int" Nullable="false" />
+          <Property Name="OrderNumber" Type="int" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="IsForBeginners" Type="bit" />
+          <Property Name="IsForIntermediate" Type="bit" />
+          <Property Name="IsForAdvanced" Type="bit" />
+          <Property Name="IsForKids" Type="bit" />
+          <Property Name="IsForAdults" Type="bit" />
+          <Property Name="FullCourseId" Type="int" />
+          <Property Name="ForWhom" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Contents" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Info" Type="nvarchar" MaxLength="4000" />
+          <Property Name="HasTrial" Type="bit" />
+          <Property Name="IsBook" Type="bit" />
+          <Property Name="HasDownloadItem" Type="bit" />
+          <Property Name="PriceDownloadItem" Type="int" />
+          <Property Name="PageText" Type="nvarchar(max)" />
+          <Property Name="IsLanguageCourse" Type="bit" />
+          <Property Name="IsWritingCourse" Type="bit" />
+          <Property Name="ActivationDate" Type="datetime" />
+          <Property Name="ActivationFreq" Type="int" />
+        </EntityType>
+        <EntityType Name="vd_Files">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Ext" Type="nvarchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="vd_Lessons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorId" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="vd_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="LoginDT" Type="datetime" Nullable="false" />
+          <Property Name="LogoutDT" Type="datetime" />
+        </EntityType>
+        <EntityType Name="vd_Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sum" Type="money" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="CreationDateTime" Type="datetime" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" Nullable="false" />
+          <Property Name="PaymentDateTime" Type="datetime" />
+          <Property Name="ResultResponse" Type="nvarchar(max)" />
+          <Property Name="UserCourseId" Type="int" />
+          <Property Name="IncSum" Type="money" />
+          <Property Name="Fee" Type="money" />
+          <Property Name="SignatureValue" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsTest" Type="bit" />
+          <Property Name="EMail" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="vd_UserCourses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
+          <Property Name="IsPaid" Type="bit" />
+          <Property Name="SubscriptionDate" Type="datetime" />
+          <Property Name="PaymentDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="vd_UserLessons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+          <Property Name="LessonId" Type="int" Nullable="false" />
+          <Property Name="UniqueId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ActivationDate" Type="datetime" />
+          <Property Name="IsReadByUser" Type="bit" />
+          <Property Name="IsLinkSent" Type="bit" />
+        </EntityType>
+        <EntityType Name="vd_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UrlName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsAuthor" Type="bit" Nullable="false" />
+          <Property Name="IsAdmin" Type="bit" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActivated" Type="bit" Nullable="false" />
+          <Property Name="Token" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_vd_ActionLog_vd_Users">
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vd_ActionLog" Type="Self.vd_ActionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_ActionLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_CourseLessons_vd_Courses">
+          <End Role="vd_Courses" Type="Self.vd_Courses" Multiplicity="1" />
+          <End Role="vd_CourseLessons" Type="Self.vd_CourseLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_CourseLessons">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_CourseLessons_vd_Lessons">
+          <End Role="vd_Lessons" Type="Self.vd_Lessons" Multiplicity="1" />
+          <End Role="vd_CourseLessons" Type="Self.vd_CourseLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Lessons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_CourseLessons">
+              <PropertyRef Name="LessonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Courses_vd_Users">
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="1" />
+          <End Role="vd_Courses" Type="Self.vd_Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Courses">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Lessons_vd_Files">
+          <End Role="vd_Files" Type="Self.vd_Files" Multiplicity="1" />
+          <End Role="vd_Lessons" Type="Self.vd_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Files">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Lessons">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Lessons_vd_Users">
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="0..1" />
+          <End Role="vd_Lessons" Type="Self.vd_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Lessons">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Log_vd_Users">
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vd_Log" Type="Self.vd_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Log">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Orders_vd_Courses">
+          <End Role="vd_Courses" Type="Self.vd_Courses" Multiplicity="1" />
+          <End Role="vd_Orders" Type="Self.vd_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Orders">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Orders_vd_UserCourses">
+          <End Role="vd_UserCourses" Type="Self.vd_UserCourses" Multiplicity="0..1" />
+          <End Role="vd_Orders" Type="Self.vd_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_UserCourses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Orders">
+              <PropertyRef Name="UserCourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Orders_vd_Users">
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vd_Orders" Type="Self.vd_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserCourses_vd_Courses">
+          <End Role="vd_Courses" Type="Self.vd_Courses" Multiplicity="1" />
+          <End Role="vd_UserCourses" Type="Self.vd_UserCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserCourses">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserCourses_vd_Users">
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vd_UserCourses" Type="Self.vd_UserCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserCourses">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserLessons_vd_Courses">
+          <End Role="vd_Courses" Type="Self.vd_Courses" Multiplicity="1" />
+          <End Role="vd_UserLessons" Type="Self.vd_UserLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserLessons">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserLessons_vd_UserLessons">
+          <End Role="vd_Lessons" Type="Self.vd_Lessons" Multiplicity="1" />
+          <End Role="vd_UserLessons" Type="Self.vd_UserLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Lessons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserLessons">
+              <PropertyRef Name="LessonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserLessons_vd_Users">
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="vd_UserLessons" Type="Self.vd_UserLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserLessons">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Users_vd_Countries">
+          <End Role="vd_Countries" Type="Self.vd_Countries" Multiplicity="0..1" />
+          <End Role="vd_Users" Type="Self.vd_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Users">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="videodbModelStoreContainer">
+          <EntitySet Name="vd_ActionLog" EntityType="Self.vd_ActionLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_ActionType" EntityType="Self.vd_ActionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_Countries" EntityType="Self.vd_Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_CourseLessons" EntityType="Self.vd_CourseLessons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_Courses" EntityType="Self.vd_Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_Files" EntityType="Self.vd_Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_Lessons" EntityType="Self.vd_Lessons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_Log" EntityType="Self.vd_Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_Orders" EntityType="Self.vd_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_UserCourses" EntityType="Self.vd_UserCourses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_UserLessons" EntityType="Self.vd_UserLessons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vd_Users" EntityType="Self.vd_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_vd_ActionLog_vd_Users" Association="Self.FK_vd_ActionLog_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_ActionLog" EntitySet="vd_ActionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_CourseLessons_vd_Courses" Association="Self.FK_vd_CourseLessons_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_CourseLessons" EntitySet="vd_CourseLessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_CourseLessons_vd_Lessons" Association="Self.FK_vd_CourseLessons_vd_Lessons">
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+            <End Role="vd_CourseLessons" EntitySet="vd_CourseLessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Courses_vd_Users" Association="Self.FK_vd_Courses_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Lessons_vd_Files" Association="Self.FK_vd_Lessons_vd_Files">
+            <End Role="vd_Files" EntitySet="vd_Files" />
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Lessons_vd_Users" Association="Self.FK_vd_Lessons_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Log_vd_Users" Association="Self.FK_vd_Log_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Log" EntitySet="vd_Log" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Orders_vd_Courses" Association="Self.FK_vd_Orders_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_Orders" EntitySet="vd_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Orders_vd_UserCourses" Association="Self.FK_vd_Orders_vd_UserCourses">
+            <End Role="vd_UserCourses" EntitySet="vd_UserCourses" />
+            <End Role="vd_Orders" EntitySet="vd_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Orders_vd_Users" Association="Self.FK_vd_Orders_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Orders" EntitySet="vd_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserCourses_vd_Courses" Association="Self.FK_vd_UserCourses_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_UserCourses" EntitySet="vd_UserCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserCourses_vd_Users" Association="Self.FK_vd_UserCourses_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_UserCourses" EntitySet="vd_UserCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserLessons_vd_Courses" Association="Self.FK_vd_UserLessons_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_UserLessons" EntitySet="vd_UserLessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserLessons_vd_UserLessons" Association="Self.FK_vd_UserLessons_vd_UserLessons">
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+            <End Role="vd_UserLessons" EntitySet="vd_UserLessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserLessons_vd_Users" Association="Self.FK_vd_UserLessons_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_UserLessons" EntitySet="vd_UserLessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Users_vd_Countries" Association="Self.FK_vd_Users_vd_Countries">
+            <End Role="vd_Countries" EntitySet="vd_Countries" />
+            <End Role="vd_Users" EntitySet="vd_Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="videodbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="vd_UserCourses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_UserCourses_vd_Users" FromRole="vd_UserCourses" ToRole="vd_Users" />
+          <Property Name="IsActivated" Type="Boolean" Nullable="false" />
+          <Property Name="IsPaid" Type="Boolean" />
+          <NavigationProperty Name="vd_Orders" Relationship="videodbModel.FK_vd_Orders_vd_UserCourses" FromRole="vd_UserCourses" ToRole="vd_Orders" />
+          <Property Name="SubscriptionDate" Type="DateTime" Precision="3" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="vd_Courses" Relationship="videodbModel.FK_vd_UserCourses_vd_Courses" FromRole="vd_UserCourses" ToRole="vd_Courses" />
+        </EntityType>
+        <EntityContainer Name="videodbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="vd_UserCourses" EntityType="Self.vd_UserCourses" />
+          <EntitySet Name="vd_Files" EntityType="videodbModel.vd_Files" />
+          <EntitySet Name="vd_UserLessons" EntityType="videodbModel.vd_UserLessons" />
+          <EntitySet Name="vd_CourseLessons" EntityType="videodbModel.vd_CourseLessons" />
+          <EntitySet Name="vd_Lessons" EntityType="videodbModel.vd_Lessons" />
+          <AssociationSet Name="FK_vd_CourseLessons_vd_Lessons" Association="videodbModel.FK_vd_CourseLessons_vd_Lessons">
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+            <End Role="vd_CourseLessons" EntitySet="vd_CourseLessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Lessons_vd_Files" Association="videodbModel.FK_vd_Lessons_vd_Files">
+            <End Role="vd_Files" EntitySet="vd_Files" />
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserLessons_vd_Lessons" Association="videodbModel.FK_vd_UserLessons_vd_Lessons">
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+            <End Role="vd_UserLessons" EntitySet="vd_UserLessons" />
+          </AssociationSet>
+          <EntitySet Name="vd_Users" EntityType="videodbModel.vd_Users" />
+          <AssociationSet Name="FK_vd_Lessons_vd_Users" Association="videodbModel.FK_vd_Lessons_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Lessons" EntitySet="vd_Lessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserCourses_vd_Users" Association="videodbModel.FK_vd_UserCourses_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_UserCourses" EntitySet="vd_UserCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserLessons_vd_Users" Association="videodbModel.FK_vd_UserLessons_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_UserLessons" EntitySet="vd_UserLessons" />
+          </AssociationSet>
+          <EntitySet Name="vd_Orders" EntityType="videodbModel.vd_Orders" />
+          <AssociationSet Name="FK_vd_Orders_vd_Users" Association="videodbModel.FK_vd_Orders_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Orders" EntitySet="vd_Orders" />
+          </AssociationSet>
+          <EntitySet Name="vd_Countries" EntityType="videodbModel.vd_Countries" />
+          <AssociationSet Name="FK_vd_Users_vd_Countries" Association="videodbModel.FK_vd_Users_vd_Countries">
+            <End Role="vd_Countries" EntitySet="vd_Countries" />
+            <End Role="vd_Users" EntitySet="vd_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Orders_vd_UserCourses" Association="videodbModel.FK_vd_Orders_vd_UserCourses">
+            <End Role="vd_UserCourses" EntitySet="vd_UserCourses" />
+            <End Role="vd_Orders" EntitySet="vd_Orders" />
+          </AssociationSet>
+          <EntitySet Name="vd_Log" EntityType="videodbModel.vd_Log" />
+          <AssociationSet Name="FK_vd_Log_vd_Users" Association="videodbModel.FK_vd_Log_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Log" EntitySet="vd_Log" />
+          </AssociationSet>
+          <EntitySet Name="vd_ActionLog" EntityType="videodbModel.vd_ActionLog" />
+          <EntitySet Name="vd_ActionType" EntityType="videodbModel.vd_ActionType" />
+          <AssociationSet Name="FK_vd_ActionLog_vd_Users" Association="videodbModel.FK_vd_ActionLog_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_ActionLog" EntitySet="vd_ActionLog" />
+          </AssociationSet>
+          <EntitySet Name="vd_Courses" EntityType="videodbModel.vd_Courses" />
+          <AssociationSet Name="FK_vd_CourseLessons_vd_Courses" Association="videodbModel.FK_vd_CourseLessons_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_CourseLessons" EntitySet="vd_CourseLessons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Courses_vd_Users" Association="videodbModel.FK_vd_Courses_vd_Users">
+            <End Role="vd_Users" EntitySet="vd_Users" />
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_Orders_vd_Courses" Association="videodbModel.FK_vd_Orders_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_Orders" EntitySet="vd_Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserCourses_vd_Courses" Association="videodbModel.FK_vd_UserCourses_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_UserCourses" EntitySet="vd_UserCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vd_UserLessons_vd_Courses" Association="videodbModel.FK_vd_UserLessons_vd_Courses">
+            <End Role="vd_Courses" EntitySet="vd_Courses" />
+            <End Role="vd_UserLessons" EntitySet="vd_UserLessons" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="vd_Files">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vd_Lessons" Relationship="videodbModel.FK_vd_Lessons_vd_Files" FromRole="vd_Files" ToRole="vd_Lessons" />
+          <Property Name="Url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Ext" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="vd_UserLessons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LessonId" Type="Int32" Nullable="false" />
+          <Property Name="UniqueId" Type="Guid" Nullable="false" />
+          <Property Name="ActivationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="vd_Lessons" Relationship="videodbModel.FK_vd_UserLessons_vd_Lessons" FromRole="vd_UserLessons" ToRole="vd_Lessons" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_UserLessons_vd_Users" FromRole="vd_UserLessons" ToRole="vd_Users" />
+          <Property Name="IsReadByUser" Type="Boolean" />
+          <Property Name="IsLinkSent" Type="Boolean" />
+          <NavigationProperty Name="vd_Courses" Relationship="videodbModel.FK_vd_UserLessons_vd_Courses" FromRole="vd_UserLessons" ToRole="vd_Courses" />
+        </EntityType>
+        <EntityType Name="vd_CourseLessons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="LessonId" Type="Int32" Nullable="false" />
+          <Property Name="OrderNumber" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="vd_Lessons" Relationship="videodbModel.FK_vd_CourseLessons_vd_Lessons" FromRole="vd_CourseLessons" ToRole="vd_Lessons" />
+          <Property Name="IsForTrial" Type="Boolean" />
+          <NavigationProperty Name="vd_Courses" Relationship="videodbModel.FK_vd_CourseLessons_vd_Courses" FromRole="vd_CourseLessons" ToRole="vd_Courses" />
+        </EntityType>
+        <EntityType Name="vd_Lessons">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="vd_CourseLessons" Relationship="videodbModel.FK_vd_CourseLessons_vd_Lessons" FromRole="vd_Lessons" ToRole="vd_CourseLessons" />
+          <NavigationProperty Name="vd_Files" Relationship="videodbModel.FK_vd_Lessons_vd_Files" FromRole="vd_Lessons" ToRole="vd_Files" />
+          <NavigationProperty Name="vd_UserLessons" Relationship="videodbModel.FK_vd_UserLessons_vd_Lessons" FromRole="vd_Lessons" ToRole="vd_UserLessons" />
+          <Property Name="AuthorId" Type="Int32" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_Lessons_vd_Users" FromRole="vd_Lessons" ToRole="vd_Users" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_vd_CourseLessons_vd_Lessons">
+          <End Type="videodbModel.vd_Lessons" Role="vd_Lessons" Multiplicity="1" />
+          <End Type="videodbModel.vd_CourseLessons" Role="vd_CourseLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Lessons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_CourseLessons">
+              <PropertyRef Name="LessonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Lessons_vd_Files">
+          <End Type="videodbModel.vd_Files" Role="vd_Files" Multiplicity="1" />
+          <End Type="videodbModel.vd_Lessons" Role="vd_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Files">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Lessons">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserLessons_vd_Lessons">
+          <End Type="videodbModel.vd_Lessons" Role="vd_Lessons" Multiplicity="1" />
+          <End Type="videodbModel.vd_UserLessons" Role="vd_UserLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Lessons">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserLessons">
+              <PropertyRef Name="LessonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vd_Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UrlName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsAuthor" Type="Boolean" Nullable="false" />
+          <Property Name="IsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActivated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="vd_Lessons" Relationship="videodbModel.FK_vd_Lessons_vd_Users" FromRole="vd_Users" ToRole="vd_Lessons" />
+          <NavigationProperty Name="vd_UserCourses" Relationship="videodbModel.FK_vd_UserCourses_vd_Users" FromRole="vd_Users" ToRole="vd_UserCourses" />
+          <NavigationProperty Name="vd_UserLessons" Relationship="videodbModel.FK_vd_UserLessons_vd_Users" FromRole="vd_Users" ToRole="vd_UserLessons" />
+          <Property Name="Token" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="vd_Orders" Relationship="videodbModel.FK_vd_Orders_vd_Users" FromRole="vd_Users" ToRole="vd_Orders" />
+          <NavigationProperty Name="vd_Countries" Relationship="videodbModel.FK_vd_Users_vd_Countries" FromRole="vd_Users" ToRole="vd_Countries" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="vd_Log" Relationship="videodbModel.FK_vd_Log_vd_Users" FromRole="vd_Users" ToRole="vd_Log" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vd_ActionLog" Relationship="videodbModel.FK_vd_ActionLog_vd_Users" FromRole="vd_Users" ToRole="vd_ActionLog" />
+          <NavigationProperty Name="vd_Courses" Relationship="videodbModel.FK_vd_Courses_vd_Users" FromRole="vd_Users" ToRole="vd_Courses" />
+        </EntityType>
+        <Association Name="FK_vd_Lessons_vd_Users">
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="0..1" />
+          <End Type="videodbModel.vd_Lessons" Role="vd_Lessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Lessons">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserCourses_vd_Users">
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="1" />
+          <End Type="videodbModel.vd_UserCourses" Role="vd_UserCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserCourses">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserLessons_vd_Users">
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="1" />
+          <End Type="videodbModel.vd_UserLessons" Role="vd_UserLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserLessons">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vd_Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="CreationDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsPaid" Type="Boolean" Nullable="false" />
+          <Property Name="PaymentDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ResultResponse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_Orders_vd_Users" FromRole="vd_Orders" ToRole="vd_Users" />
+          <Property Name="Sum" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="UserCourseId" Type="Int32" />
+          <NavigationProperty Name="vd_UserCourses" Relationship="videodbModel.FK_vd_Orders_vd_UserCourses" FromRole="vd_Orders" ToRole="vd_UserCourses" />
+          <Property Name="IncSum" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Fee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SignatureValue" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsTest" Type="Boolean" />
+          <Property Name="EMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vd_Courses" Relationship="videodbModel.FK_vd_Orders_vd_Courses" FromRole="vd_Orders" ToRole="vd_Courses" />
+        </EntityType>
+        <Association Name="FK_vd_Orders_vd_Users">
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="1" />
+          <End Type="videodbModel.vd_Orders" Role="vd_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vd_Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RusName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EngName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Alpha2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Alpha3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ISO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_Users_vd_Countries" FromRole="vd_Countries" ToRole="vd_Users" />
+        </EntityType>
+        <Association Name="FK_vd_Users_vd_Countries">
+          <End Type="videodbModel.vd_Countries" Role="vd_Countries" Multiplicity="0..1" />
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Users">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Orders_vd_UserCourses">
+          <End Type="videodbModel.vd_UserCourses" Role="vd_UserCourses" Multiplicity="0..1" />
+          <End Type="videodbModel.vd_Orders" Role="vd_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_UserCourses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Orders">
+              <PropertyRef Name="UserCourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vd_Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="LoginDT" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LogoutDT" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_Log_vd_Users" FromRole="vd_Log" ToRole="vd_Users" />
+        </EntityType>
+        <Association Name="FK_vd_Log_vd_Users">
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="1" />
+          <End Type="videodbModel.vd_Log" Role="vd_Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Log">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vd_ActionLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="SessionId" Type="Int32" />
+          <Property Name="ActionType" Type="Int32" Nullable="false" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_ActionLog_vd_Users" FromRole="vd_ActionLog" ToRole="vd_Users" />
+        </EntityType>
+        <EntityType Name="vd_ActionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_vd_ActionLog_vd_Users">
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="videodbModel.vd_ActionLog" Role="vd_ActionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_ActionLog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vd_Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UrlName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDescription" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="OrderNumber" Type="Int32" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="IsForBeginners" Type="Boolean" />
+          <Property Name="IsForIntermediate" Type="Boolean" />
+          <Property Name="IsForAdvanced" Type="Boolean" />
+          <Property Name="IsForKids" Type="Boolean" />
+          <Property Name="IsForAdults" Type="Boolean" />
+          <Property Name="FullCourseId" Type="Int32" />
+          <Property Name="ForWhom" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Contents" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Info" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="HasTrial" Type="Boolean" />
+          <Property Name="IsBook" Type="Boolean" />
+          <Property Name="HasDownloadItem" Type="Boolean" />
+          <Property Name="PriceDownloadItem" Type="Int32" />
+          <Property Name="PageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsLanguageCourse" Type="Boolean" />
+          <Property Name="IsWritingCourse" Type="Boolean" />
+          <NavigationProperty Name="vd_CourseLessons" Relationship="videodbModel.FK_vd_CourseLessons_vd_Courses" FromRole="vd_Courses" ToRole="vd_CourseLessons" />
+          <NavigationProperty Name="vd_Users" Relationship="videodbModel.FK_vd_Courses_vd_Users" FromRole="vd_Courses" ToRole="vd_Users" />
+          <NavigationProperty Name="vd_Orders" Relationship="videodbModel.FK_vd_Orders_vd_Courses" FromRole="vd_Courses" ToRole="vd_Orders" />
+          <NavigationProperty Name="vd_UserCourses" Relationship="videodbModel.FK_vd_UserCourses_vd_Courses" FromRole="vd_Courses" ToRole="vd_UserCourses" />
+          <NavigationProperty Name="vd_UserLessons" Relationship="videodbModel.FK_vd_UserLessons_vd_Courses" FromRole="vd_Courses" ToRole="vd_UserLessons" />
+          <Property Name="IsPackage" Type="Boolean" />
+          <Property Name="ParentCourseId" Type="Int32" />
+          <Property Name="HasPackages" Type="Boolean" />
+          <Property Name="ActivationDate" Type="DateTime" Precision="3" />
+          <Property Name="ActivationFreq" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_vd_CourseLessons_vd_Courses">
+          <End Type="videodbModel.vd_Courses" Role="vd_Courses" Multiplicity="1" />
+          <End Type="videodbModel.vd_CourseLessons" Role="vd_CourseLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_CourseLessons">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Courses_vd_Users">
+          <End Type="videodbModel.vd_Users" Role="vd_Users" Multiplicity="1" />
+          <End Type="videodbModel.vd_Courses" Role="vd_Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Courses">
+              <PropertyRef Name="AuthorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_Orders_vd_Courses">
+          <End Type="videodbModel.vd_Courses" Role="vd_Courses" Multiplicity="1" />
+          <End Type="videodbModel.vd_Orders" Role="vd_Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_Orders">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserCourses_vd_Courses">
+          <End Type="videodbModel.vd_Courses" Role="vd_Courses" Multiplicity="1" />
+          <End Type="videodbModel.vd_UserCourses" Role="vd_UserCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserCourses">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vd_UserLessons_vd_Courses">
+          <End Type="videodbModel.vd_Courses" Role="vd_Courses" Multiplicity="1" />
+          <End Type="videodbModel.vd_UserLessons" Role="vd_UserLessons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vd_Courses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="vd_UserLessons">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="videodbModelStoreContainer" CdmEntityContainer="videodbEntities">
+          <EntitySetMapping Name="vd_UserCourses">
+            <EntityTypeMapping TypeName="videodbModel.vd_UserCourses">
+              <MappingFragment StoreEntitySet="vd_UserCourses">
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="SubscriptionDate" ColumnName="SubscriptionDate" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_Files">
+            <EntityTypeMapping TypeName="videodbModel.vd_Files">
+              <MappingFragment StoreEntitySet="vd_Files">
+                <ScalarProperty Name="Ext" ColumnName="Ext" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_UserLessons">
+            <EntityTypeMapping TypeName="videodbModel.vd_UserLessons">
+              <MappingFragment StoreEntitySet="vd_UserLessons">
+                <ScalarProperty Name="IsLinkSent" ColumnName="IsLinkSent" />
+                <ScalarProperty Name="IsReadByUser" ColumnName="IsReadByUser" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+                <ScalarProperty Name="UniqueId" ColumnName="UniqueId" />
+                <ScalarProperty Name="LessonId" ColumnName="LessonId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_CourseLessons">
+            <EntityTypeMapping TypeName="videodbModel.vd_CourseLessons">
+              <MappingFragment StoreEntitySet="vd_CourseLessons">
+                <ScalarProperty Name="IsForTrial" ColumnName="IsForTrial" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="LessonId" ColumnName="LessonId" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_Lessons">
+            <EntityTypeMapping TypeName="videodbModel.vd_Lessons">
+              <MappingFragment StoreEntitySet="vd_Lessons">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_Users">
+            <EntityTypeMapping TypeName="videodbModel.vd_Users">
+              <MappingFragment StoreEntitySet="vd_Users">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="IsActivated" ColumnName="IsActivated" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+                <ScalarProperty Name="IsAuthor" ColumnName="IsAuthor" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="UrlName" ColumnName="UrlName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_Orders">
+            <EntityTypeMapping TypeName="videodbModel.vd_Orders">
+              <MappingFragment StoreEntitySet="vd_Orders">
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="IsTest" ColumnName="IsTest" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="SignatureValue" ColumnName="SignatureValue" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="IncSum" ColumnName="IncSum" />
+                <ScalarProperty Name="UserCourseId" ColumnName="UserCourseId" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="ResultResponse" ColumnName="ResultResponse" />
+                <ScalarProperty Name="PaymentDateTime" ColumnName="PaymentDateTime" />
+                <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+                <ScalarProperty Name="CreationDateTime" ColumnName="CreationDateTime" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_Countries">
+            <EntityTypeMapping TypeName="videodbModel.vd_Countries">
+              <MappingFragment StoreEntitySet="vd_Countries">
+                <ScalarProperty Name="ISO" ColumnName="ISO" />
+                <ScalarProperty Name="Alpha3" ColumnName="Alpha3" />
+                <ScalarProperty Name="Alpha2" ColumnName="Alpha2" />
+                <ScalarProperty Name="EngName" ColumnName="EngName" />
+                <ScalarProperty Name="RusName" ColumnName="RusName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_Log">
+            <EntityTypeMapping TypeName="videodbModel.vd_Log">
+              <MappingFragment StoreEntitySet="vd_Log">
+                <ScalarProperty Name="LogoutDT" ColumnName="LogoutDT" />
+                <ScalarProperty Name="LoginDT" ColumnName="LoginDT" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_ActionLog">
+            <EntityTypeMapping TypeName="videodbModel.vd_ActionLog">
+              <MappingFragment StoreEntitySet="vd_ActionLog">
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="SessionId" ColumnName="SessionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_ActionType">
+            <EntityTypeMapping TypeName="videodbModel.vd_ActionType">
+              <MappingFragment StoreEntitySet="vd_ActionType">
+                <ScalarProperty Name="ActionName" ColumnName="ActionName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vd_Courses">
+            <EntityTypeMapping TypeName="videodbModel.vd_Courses">
+              <MappingFragment StoreEntitySet="vd_Courses">
+                <ScalarProperty Name="ActivationFreq" ColumnName="ActivationFreq" />
+                <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+                <ScalarProperty Name="HasPackages" ColumnName="HasPackages" />
+                <ScalarProperty Name="ParentCourseId" ColumnName="ParentCourseId" />
+                <ScalarProperty Name="IsPackage" ColumnName="IsPackage" />
+                <ScalarProperty Name="IsWritingCourse" ColumnName="IsWritingCourse" />
+                <ScalarProperty Name="IsLanguageCourse" ColumnName="IsLanguageCourse" />
+                <ScalarProperty Name="PageText" ColumnName="PageText" />
+                <ScalarProperty Name="PriceDownloadItem" ColumnName="PriceDownloadItem" />
+                <ScalarProperty Name="HasDownloadItem" ColumnName="HasDownloadItem" />
+                <ScalarProperty Name="IsBook" ColumnName="IsBook" />
+                <ScalarProperty Name="HasTrial" ColumnName="HasTrial" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Contents" ColumnName="Contents" />
+                <ScalarProperty Name="ForWhom" ColumnName="ForWhom" />
+                <ScalarProperty Name="FullCourseId" ColumnName="FullCourseId" />
+                <ScalarProperty Name="IsForAdults" ColumnName="IsForAdults" />
+                <ScalarProperty Name="IsForKids" ColumnName="IsForKids" />
+                <ScalarProperty Name="IsForAdvanced" ColumnName="IsForAdvanced" />
+                <ScalarProperty Name="IsForIntermediate" ColumnName="IsForIntermediate" />
+                <ScalarProperty Name="IsForBeginners" ColumnName="IsForBeginners" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UrlName" ColumnName="UrlName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,48 @@
+﻿
+@{
+  ViewBag.Title = "Test";
+}
+
+@*<iframe width="853" height="480" src=@("/api/sample/mp4/teste123") frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>*@
+@*<video oncontextmenu="return false;" controls id="myvid" src="/api/sample/mp4/teste123">
+        Your browser does not support the video tag.
+    </video>*@
+<style>
+    video {
+        width: 100%;
+        position: relative;
+    }
+</style>
+<div class="page-header header-filter header-small" filter-color="purple" data-parallax="true" style="background-image: url('../../Content/img/bg10.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-center">
+                <h2><b>Школа Эмиграционного Обучения</b></h2>
+                @*<h6><i>Человек устроен так, что, когда что-то зажигает его душу, всё становится возможным. Жан де Лафонтен</i></h6>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main main-raised">
+    <div class="subscribe-line">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Column 1</h3>
+                    <video oncontextmenu="return false;" controls id="myvid" src="~/english-breakfast-1.mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Column 1</h3>
+                    <video oncontextmenu="return false;" controls id="myvid" src="/api/sample/mp4/teste123">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

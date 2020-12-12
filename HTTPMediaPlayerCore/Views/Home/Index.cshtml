@@ -1,0 +1,533 @@
+﻿@model CourceCategoryContainer
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using HTTPMediaPlayerCore.Models;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
+
+@*<link href="~/css/login.css" rel="stylesheet" />*@
+
+<div class="page-header header-filter header-small" filter-color="purple" data-parallax="true" style="background-image: url('../../img/duways_header.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-center">
+                <h2 class="white-text-with-brown-shadow"><b>ТЕРРИТОРИЯ ОНЛАЙН МАСТЕРСКИХ</b></h2>
+                @*<h4 class="white-text-with-brown-shadow"> Образовательная платформа для авторов и слушателей онлайн видео курсов</h4>*@
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-7 ml-auto mr-auto text-center">
+                @*<a href="#" class="btn btn-rose btn-primary btn-block btn-lg">
+                        Cтать автором и начать зарабатывать
+                    </a>*@
+                <button class="btn btn-rose btn-lg" data-toggle="modal" data-target="#loginModal">
+                    Cтать автором и начать зарабатывать
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-login" role="document">
+        <div class="modal-content">
+            <div class="card card-signup card-plain">
+                @*<div class="login-box login-loader-bg">
+                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                        <p>
+                            Отправка...
+                        </p>
+                    </div>*@
+                <div class="modal-header">
+                    <div class="card-header card-header-rose text-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
+                        <h4 class="card-title">Давайте знакомиться!</h4>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">face</i>
+                                    </span>
+                                </div>
+                                <input type="text" id="name" class="form-control" placeholder="Как вас зовут">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">mail</i>
+                                    </span>
+                                </div>
+                                <input type="text" id="email" class="form-control" placeholder="Ваш Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="material-icons">lock_outline</i>
+                                    </span>
+                                </div>
+                                <textarea class="form-control" id="msg" placeholder="Расскажите нам о своей идее" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <a onclick="SendMessage()" data-dismiss="modal" class="btn btn-primary btn-link btn-wd btn-lg">Отправить</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  End Modal -->
+
+<div class="main main-raised">
+    <div class="container">
+        <div class="section">
+            <!--     *********     FEATURES 1      *********      -->
+            <div class="features-1" style="padding:0px!important;">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h2 class="title">О нас</h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4><b>Добро пожаловать на территорию настоящих мастеров!</b></h4> Мы рады вам, если вы - мастер своего дела и вам есть, чем поделиться с другими. И вы точно по адресу, если хотите учиться у лучших!
+                        Наша продюсерская команда готова помочь вам превратить ваше дело жизни в прибыльный онлайн бизнес, найти свою нишу, поделиться знаниями и умениями, реализовать свой творческий потенциал и воплотить мечты! Все, что потребуется от вас - искренняя готовность работать и мастерство!
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="info">
+                            <div class="icon icon-info">
+                                <i class="material-icons">chat</i>
+                            </div>
+                            <h4 class="info-title">КОНСУЛЬТАЦИЯ</h4>
+                            <p>Экспресс-анализ вашей идеи, ниши и конкурентов с последующей часовой консультацией в режиме звонка с разработкой стратегии, ответами на вопросы и рекомендациями по созданию максимально востребованного и успешного курса. Цена - 3,000 рублей</p>
+                            <row>
+                                <div class="col-md-12 col-lg-12">
+                                    @*<button class="btn btn-success btn-lg" data-toggle="modal" data-target="#loginModal">
+                                        <i class="material-icons">create</i> Записаться
+                                    </button>*@
+                                    <a href="@Url.Action("Register", "Account", new { course = "consultation" })" style="width:100%;" class="btn btn-success btn-lg" >
+                                        <i class="material-icons">payment</i>Купить
+                                    </a>
+                                </div>
+                            </row>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info">
+                            <div class="icon icon-danger">
+                                <i class="material-icons">support</i>
+                            </div>
+                            <h4 class="info-title">МЕНТОРСТВО</h4>
+                            <p>Помощь команды в разработке курса, выстраивании концепции, планировании и создании курса, включая 2 часовых консультации в режиме звонка и контроля этапов разработки.<br /> Длительность - 2 недели.<br /> Цена - 7,000 рублей</p>
+                            <row>
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-success btn-lg" style="width:100%;" data-toggle="modal" data-target="#loginModal">
+                                        <i class="material-icons">create</i> Записаться
+                                    </button>
+                                </div>
+                            </row>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="info">
+                            <div class="icon icon-success">
+                                <i class="material-icons">trending_up</i>
+                            </div>
+                            <h4 class="info-title">ПРОДВИЖЕНИЕ</h4>
+                            <p>Разработка индивидуального плана продвижения, закупка рекламы, настройка таргета, работа с рекламными платформами, создание макетов и пр.<br /><br /><br /> Цена - от 5,000 рублей. </p>
+                            <row>
+                                <div class="col-md-12 col-lg-12">
+                                    <button class="btn btn-success btn-lg" style="width:100%;" data-toggle="modal" data-target="#loginModal">
+                                        <i class="material-icons">create</i> Записаться
+                                    </button>
+                                </div>
+                            </row>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--     *********    END FEATURES 1      *********      -->
+            <!--     *********    TESTIMONIALS 2     *********      -->
+            <h3>ХИТЫ ПРОДАЖ</h3>
+            <div class="testimonials-2" style="padding:0px!important;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="carouselExampleIndicatorss" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    @{ int counter = 0;
+                                        foreach (var item in Model.Author.AuthorCourses.Where(ac => ac.Course.IsPackage != true))
+                                        {
+                                            if (item.Course.CategoryId == 1)
+                                            {
+                                                <div class='@(counter == 0 ? "carousel-item active" : "carousel-item")'>
+                                                    <div class="card card-plain card-blog">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <div class="card-header card-header-image">
+                                                                    <a href='@Url.Action(item.Course.UrlName, "Course")'>
+                                                                        <img class="img" src='@("/Authors/" + item.AuthorId + "/" + item.CourseId + ".jpg")' />
+                                                                    </a>
+                                                                </div>
+                                                                <br />
+                                                                <row>
+                                                                    <div class="col-md-12 col-lg-12">
+                                                                        @if (item.Course.HasPackages == true)
+                                                                        {<a href="@Url.Action(item.Course.UrlName, "Course")" style="width:100%;" class="btn btn-rose">
+                                                                                <i class="material-icons">create</i> Записаться
+                                                                            </a>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-rose">
+                                                                                <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                                                            </a>
+                                                                        }
+                                                                    </div>
+                                                                </row>
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <h6 class="card-category text-danger"><i class="material-icons">trending_up</i> Лидер продаж</h6>
+                                                                <h3 class="card-title">
+                                                                    <a href="@Url.Action(item.Course.UrlName, "Course")">@(item.Course.Name)</a>
+                                                                </h3>
+                                                                <p class="card-description">
+                                                                    @(item.Course.ShortDescription)
+                                                                    <a href="@Url.Action(item.Course.UrlName, "Course")"> Подробнее </a>
+                                                                </p>
+                                                                <p class="author">
+                                                                    от
+                                                                    <a href="@Url.Action(item.Author.AuthorUrl, "Author")">
+                                                                        <b>@item.Author.WorkShopName</b>
+                                                                    </a>
+                                                                </p>
+                                                                <div class="footer">
+                                                                    <i class="material-icons text-warning">star</i>
+                                                                    <i class="material-icons text-warning">star</i>
+                                                                    <i class="material-icons text-warning">star</i>
+                                                                    <i class="material-icons text-warning">star</i>
+                                                                    <i class="material-icons text-warning">star</i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                counter++;
+                                            }
+                                        }
+                                    }
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleIndicatorss" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleIndicatorss" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--     *********    END TESTIMONIALS 2      *********      -->
+
+
+            <h3>РЕКОМЕНДУЕМЫЕ КУРСЫ</h3>
+            <div class="row">
+                @{foreach (var item in Model.Author.AuthorCourses.Where(ac => ac.Course.IsPackage != true))
+                    {
+                        if (item.Course.CategoryId == 2 || item.Course.CategoryId == 3)
+                        {
+
+                            <div class="col-lg-4 col-md-12 col-sm-12">
+                                <div class="card card-blog">
+                                    <div class="card-header card-header-image">
+                                        <a href='@Url.Action(item.Course.UrlName, "Course")'>
+                                            <img class="img" src='@("/Authors/" + item.AuthorId + "/" + item.CourseId + ".jpg")' />
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <h6 class="card-category text-warning">
+                                            @*<i class="material-icons">trending_up</i> Лидер продаж*@
+                                            <i class="material-icons">star</i>Избранное
+                                        </h6>
+                                        <h4 class="card-title">
+                                            <a href="@Url.Action(item.Course.UrlName, "Course")">@(item.Course.Name)</a>
+                                        </h4>
+                                        <p class="card-description">
+                                            @(item.Course.ShortDescription)
+                                            <a href="@Url.Action(item.Course.UrlName, "Course")"> Подробнее </a>
+                                        </p>
+                                    </div>
+
+                                    <div class="card-footer ">
+                                        <div class="author">
+                                            <a href="@Url.Action(item.Author.AuthorUrl, "Author")">
+                                                <img src=@("/Authors/" + item.AuthorId + "/dp.jpg") alt="..." class="avatar img-raised">
+                                                <span>@item.Author.WorkShopName</span>
+                                            </a>
+                                        </div>
+                                        <div class="stats ml-auto">
+                                            <i class="material-icons">schedule</i> @(item.Course.LessonNumber + " " + item.Course.LessonName)
+                                        </div>
+
+                                    </div>
+                                    <row>
+                                        <div class="col-md-12 col-lg-12">
+                                            @if (item.Course.HasPackages == true)
+                                            {
+                                                <a href="@Url.Action(item.Course.UrlName, "Course")" style="width:100%;" class="btn btn-warning">
+                                                    <i class="material-icons">create</i> Записаться
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-warning">
+                                                    <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                                </a>
+                                            }
+                                        </div>
+                                    </row>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+
+            <div class="title">
+                <h3>ПОПУЛЯРНЫЕ АВТОРЫ</h3>
+            </div>
+            <div class="row">
+            @foreach (Author author in Model.AuthorsSection)
+            {
+                <div class="col-md-4">
+                    <div class="card card-profile">
+                        <div class="card-avatar">
+                            <a href="@Url.Action(author.AuthorUrl, "Author")">
+                                <img class="img" src='@("/Authors/" + author.Id + "/dp.jpg")'>
+                            </a>
+                        </div>
+                        <div class="card-body ">
+                            <h6 class="card-category text-gray">@author.Title</h6>
+                            <a href="@Url.Action(author.AuthorUrl, "Author")">
+                                <h4 class="card-title">@author.WorkShopName</h4>
+                            </a>
+                            <p class="card-description">
+                                @author.Description
+                            </p>
+                            <a href="@Url.Action(author.AuthorUrl, "Author")" class="btn btn-info">УЗНАТЬ БОЛЬШЕ</a>
+                        </div>
+                        @*<div class="footer">
+                            <i class="material-icons text-warning">star</i>
+                            <i class="material-icons text-warning">star</i>
+                            <i class="material-icons text-warning">star</i>
+                            <i class="material-icons text-warning">star</i>
+                            <i class="material-icons text-warning">star</i>
+                        </div>*@
+                        <div class="card-footer justify-content-center">
+                            <a href='@(author.VK)' class="btn btn-just-icon btn-link btn-facebook">
+                                <i class="fa fa-vk"></i>
+                            </a>
+                            <a href='@(author.Instagram)' class="btn btn-just-icon btn-link btn-instagram">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer class="footer footer-big">
+    <div class="container">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="#pablo">
+                        <h5>DUWAYS</h5>
+                    </a>
+                    <p>Добро пожаловать на территорию настоящих мастеров! Мы рады вам, если вы - мастер своего дела и вам есть, чем поделиться с другими. И вы точно по адресу, если хотите учиться у лучших! </p>
+                </div>
+                <div class="col-md-2">
+                    @*<h5>About</h5>
+                        <ul class="links-vertical">
+                            <li>
+                                <a href="#du">
+                                   
+                                </a>
+                            </li>
+                        </ul>*@
+                </div>
+                <div class="col-md-2">
+                    @*<h5></h5>
+                        <ul class="links-vertical">
+                            <li>
+                                <a href="#du">
+                                </a>
+                            </li>
+                        </ul>*@
+                </div>
+                <div class="col-md-2">
+                    <h5>Разное</h5>
+                    <ul class="links-vertical">
+                        <li>
+                            <a href='@Url.Action("FAQ", "Misc")'>
+                                FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("Pricelist", "Misc")'>
+                                Цены
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Подписаться на рассылку</h5>
+                    <p>
+                        Подпишитесь на рассылку и получайте новости о наших новых курсах и программах в ваш почтовый ящик!
+                    </p>
+                    <form class="form form-newsletter" method="" action="">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Ваш Email...">
+                        </div>
+                        <button type="button" class="btn btn-primary btn-just-icon" name="button">
+                            <i class="material-icons">mail</i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <ul class="social-buttons">
+            @*<li>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-facebook">
+                        <i class="fa fa-facebook-square"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble">
+                        <i class="fa fa-dribbble"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-google">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-youtube">
+                        <i class="fa fa-youtube-play"></i>
+                    </a>
+                </li>*@
+            @*<li>
+                    <a href="https://instagram.com/ancheta_k?igshid=ax8264q04l86">
+                        <img style=" height:25px;" src="~/img/insta.png" />
+                    </a>
+                </li>*@
+            @*<li>
+                    <a href="#pablo" class="btn btn-just-icon btn-link btn-facebook">
+                        <i class="fa fa-vk"></i>
+                    </a>
+                </li>*@
+        </ul>
+        @*<div class="copyright pull-center">
+                Copyright &#xA9;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> Creative Tim All Rights Reserved.
+            </div>*@
+
+        <div class="copyright pull-center">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script>, made by
+            <a href="mailto:contact@tetragon.solutions">TS</a>
+        </div>
+    </div>
+</footer>
+
+@section scripts{
+    @*<script src="~/js/plugins/sweetalert2.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        //swal("Успешно отправлено!", "Ваш запрос выполнен!", "success");
+    });
+    function SendMessage() {
+        //$('.login-loader-bg').show();
+        swal("Успешно отправлено!", "Ваш запрос выполнен!", "success");
+        SendMessageAjax($('#name').val(), $('#email').val(), $('#msg').val());
+    }
+
+    function SendMessageAjax(nameval, emailval, messageval) {
+            var model = {
+                name: nameval,
+                email: emailval,
+                message: messageval
+            };
+
+            var regmodel = model;//JSON.stringify(model);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("SendMessage", "Home")',
+                contentType: "application/x-www-form-urlencoded",
+                data: regmodel,
+                success: function (result) {
+                    if (result.Success) { // this sets the value from the response
+                        //swal("Успешно отправлено!", "Ваш запрос выполнен!", "success");
+                        //$('.login-loader-bg').hide();
+                        //swal({
+                        //    type: 'success',
+                        //    html: 'Ссылка отправлена на почту: <strong>' +
+                        //        result.EmailVal +
+                        //        '</strong>',
+                        //    confirmButtonClass: 'btn btn-success',
+                        //    buttonsStyling: false
+                        //})
+                    }
+                    else {
+                        //$('.login-loader-bg').hide();
+                        //swal("Ошибка!", result.Result, "error");
+                    }
+                },
+                error: function (e) {
+                    //$('.login-loader-bg').hide();
+                    //swal("Ошибка!", "Что-то пошло не так", "error");
+                }
+            });
+    }
+    </script>
+
+}
+
+

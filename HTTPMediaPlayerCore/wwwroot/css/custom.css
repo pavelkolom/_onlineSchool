@@ -1,0 +1,12 @@
+﻿.header-filter:after, .header-filter:before {
+    opacity:0.5;
+}
+
+.nav-item {
+display: inline-block;
+}
+
+.nav-pills{
+display:table; 
+margin:0 auto;  
+}

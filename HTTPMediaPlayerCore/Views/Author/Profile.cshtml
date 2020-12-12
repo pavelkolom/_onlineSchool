@@ -1,0 +1,143 @@
+﻿@model CourceCategoryContainer
+
+@{
+
+}
+<div class="profile-page">
+    <div class="page-header header-filter header-small" filter-color='@(Model.Author.Filter != null ? Model.Author.Filter.Name : "")' data-parallax="true" style='@(Model.Author.PersonalPageHeaderPic != null ? ("background-image: url('/Authors/" + Model.Author.Id + "/" + Model.Author.PersonalPageHeaderPic +"');") : "background-image: url('../img/kit/city.jpg")'>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="white-text-with-brown-shadow"><b>@Model.Author.PersonalPageTitle</b></h2>@*ТВОРЧЕСКАЯ МАСТЕРСКАЯ АНЧЕ*@
+                    <h4 class="white-text-with-brown-shadow">@Model.Author.PersonalPageSlogan</h4>@*Литература и кино на одной платформе*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main main-raised">
+        <div class="profile-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 ml-auto mr-auto">
+                        <div class="profile">
+                            <div class="avatar">
+                                @*<img src="@("../../img/author/" +  Model.AuthorInfo.UrlName + ".jpg")" alt="ancheta" class="img-raised rounded-circle img-fluid">*@
+                                <img src="@("/Authors/" + Model.Author.Id.ToString() + "/dp.jpg")" alt="@(Model.Author.WorkShopName)" class="img-raised rounded-circle img-fluid">
+                            </div>
+                            <div class="name">
+                                <h3 class="title">@Model.Author.WorkShopName</h3>
+                                <h6>@Model.Author.Title</h6>
+                                @if (Model.Author.VK != null)
+                                {
+                                <a href='@Model.Author.VK' class="btn btn-just-icon btn-link btn-facebook"><i class="fa fa-vk"></i></a>
+                                }
+
+                                @if (Model.Author.Instagram != null)
+                                {
+                                <a href='@Model.Author.Instagram' class="btn btn-just-icon btn-link btn-instagram"><i class="fa fa-instagram"></i></a>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="description text-center">
+                    <p>@Model.Author.Description</p>
+                </div>
+
+                <div class="container">
+                    <div class="section-text">
+                        <div class="row">
+                            <div class="col-md-8 ml-auto mr-auto">
+                                @Html.Raw(Model.AuthorPageHTML)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @foreach (var cat in Model.Categories)
+                {
+                    if (Model.Author.AuthorCourses.Where(c => c.Course.CategoryId == cat.Id).Count() > 0)
+                    {
+                <h3>@cat.CategoryName</h3>
+
+                <div class="row">
+                    @{foreach (var item in Model.Author.AuthorCourses.Where(ac => ac.Course.IsPackage != true))
+                                {
+                                    if (item.Course.CategoryId == cat.Id)
+                                    {
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="card card-blog">
+                                <div class="card-header card-header-image">
+                                    <a href="@Url.Action(item.Course.UrlName, "Course")">
+                                        <img src=@("/Authors/" + item.AuthorId + "/" + item.CourseId + ".jpg") alt="">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    @*<h6 class="card-category text-warning">
+                                <i class="material-icons">star</i>Избранное
+                            </h6>*@
+                                    <h4 class="card-title">
+                                        <a href="@Url.Action(item.Course.UrlName, "Course")">@(item.Course.Name)</a>
+                                    </h4>
+                                    <p class="card-description">
+                                        @(item.Course.ShortDescription)
+                                        <a href="@Url.Action(item.Course.UrlName, "Course")"> Подробнее </a>
+                                    </p>
+                                </div>
+
+                                <div class="card-footer ">
+                                    <div class="stats ml-auto">
+                                        <i class="material-icons">schedule</i> @(item.Course.LessonNumber + " " + item.Course.LessonName)
+                                    </div>
+                                </div>
+                                <row>
+                                    <div class="col-md-12 col-lg-12">
+                                        @if (item.Course.HasPackages == true)
+                                                        {
+                                        <a href="@Url.Action(item.Course.UrlName, "Course")" style="width:100%;" class="btn btn-primary">
+                                            <i class="material-icons">create</i> Записаться
+                                        </a>
+                                                        }
+                                                        else
+                                                        {
+                                        <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-primary">
+                                            <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                        </a>
+                                                        }
+                                    </div>
+                                </row>
+                            </div>
+                        </div>
+                                    }
+                                }
+                    }
+                </div>
+                    }
+                }
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+                <footer class="footer">
+                    <div class="container">
+                        <nav class="float-left">
+                            <ul>
+                                <li>
+                                    <a href="@("https://duways.com/Pages/" + Model.Author.Id + "/agreement.html")" target="_blank">
+                                        Согласие на обработку данных
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@("https://duways.com/Pages/" + Model.Author.Id + "/oferta.html")" target="_blank">
+                                        Публичная оферта-договор
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </footer>

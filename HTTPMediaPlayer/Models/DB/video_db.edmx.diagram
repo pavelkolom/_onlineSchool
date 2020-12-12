@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a316d2ee41b34e579458cda0e5d72f87" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="videodbModel.vd_UserCourses" Width="1.5" PointX="9.125" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="videodbModel.vd_Files" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="videodbModel.vd_UserLessons" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="videodbModel.vd_CourseLessons" Width="1.5" PointX="6.125" PointY="9" />
+        <EntityTypeShape EntityType="videodbModel.vd_Lessons" Width="1.5" PointX="0.625" PointY="5.625" />
+        <AssociationConnector Association="videodbModel.FK_vd_CourseLessons_vd_Lessons" />
+        <AssociationConnector Association="videodbModel.FK_vd_Lessons_vd_Files" />
+        <AssociationConnector Association="videodbModel.FK_vd_UserLessons_vd_Lessons" />
+        <EntityTypeShape EntityType="videodbModel.vd_Users" Width="1.5" PointX="6.125" PointY="1.5" />
+        <AssociationConnector Association="videodbModel.FK_vd_Lessons_vd_Users" />
+        <AssociationConnector Association="videodbModel.FK_vd_UserCourses_vd_Users" />
+        <AssociationConnector Association="videodbModel.FK_vd_UserLessons_vd_Users" />
+        <EntityTypeShape EntityType="videodbModel.vd_Orders" Width="1.5" PointX="12.125" PointY="4.5" />
+        <AssociationConnector Association="videodbModel.FK_vd_Orders_vd_Users" />
+        <EntityTypeShape EntityType="videodbModel.vd_Countries" Width="1.5" PointX="3.875" PointY="2.875" />
+        <AssociationConnector Association="videodbModel.FK_vd_Users_vd_Countries" />
+        <AssociationConnector Association="videodbModel.FK_vd_Orders_vd_UserCourses" />
+        <EntityTypeShape EntityType="videodbModel.vd_Log" Width="1.5" PointX="12.375" PointY="1.875" />
+        <AssociationConnector Association="videodbModel.FK_vd_Log_vd_Users" />
+        <EntityTypeShape EntityType="videodbModel.vd_ActionLog" Width="1.5" PointX="9.375" PointY="7" />
+        <EntityTypeShape EntityType="videodbModel.vd_ActionType" Width="1.5" PointX="3" PointY="8.25" />
+        <AssociationConnector Association="videodbModel.FK_vd_ActionLog_vd_Users" />
+        <EntityTypeShape EntityType="videodbModel.vd_Courses" Width="1.5" PointX="15.125" PointY="6.75" />
+        <AssociationConnector Association="videodbModel.FK_vd_CourseLessons_vd_Courses" />
+        <AssociationConnector Association="videodbModel.FK_vd_Courses_vd_Users" />
+        <AssociationConnector Association="videodbModel.FK_vd_Orders_vd_Courses" />
+        <AssociationConnector Association="videodbModel.FK_vd_UserCourses_vd_Courses" />
+        <AssociationConnector Association="videodbModel.FK_vd_UserLessons_vd_Courses" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,25 @@
+﻿@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../../../fonts/fontawesome-webfont.eot'),
+       url('../../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+       url('../../../fonts/glyphicons-halflings-regular.woff2') format('woff2'),
+       url('../../../fonts/glyphicons-halflings-regular.woff') format('woff'),
+       url('../../../fonts/glyphicons-halflings-regular.ttf') format('truetype'),
+       url('../../../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font: normal normal 16px/1 'Glyphicons Halflings';
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  margin-right: 4px;
+}
+/* Add icons you will be using below */
+.glyphicon-fire:before {
+  content: '\e104';
+}
+.glyphicon-eye-open:before {
+  content: '\e105';
+}

@@ -1,0 +1,36 @@
+﻿@model HTTPMediaPlayer.Models.UserCourse
+
+@using (HTTPMediaPlayer.Models.DB.videodbEntities db = new HTTPMediaPlayer.Models.DB.videodbEntities())
+{
+    HTTPMediaPlayer.Models.DB.vd_UserCourses myUserCourse = db.vd_UserCourses.FirstOrDefault(ul => ul.vd_Users.Id == Model.userid && ul.CourseId == Model.courseid);
+    foreach (var item in myUserCourse.vd_Courses.vd_CourseLessons.OrderBy(l => l.OrderNumber))
+    {
+        var x = item.vd_Lessons.vd_UserLessons.FirstOrDefault(ul => ul.LessonId == item.LessonId && ul.UserId == myUserCourse.UserId && ul.CourseId == myUserCourse.CourseId);
+        if (x != null)
+        {
+
+            if (item.IsForTrial == true || (item.IsForTrial == false && myUserCourse.IsPaid == true))
+            {
+                if (myUserCourse.IsActivated && x.ActivationDate.Value < DateTime.Now)
+                {
+                    <a class="link" data-lesson="@(item.vd_Lessons.Id)" href=@(Session["SessionID"] != null ?  ("/api/sample/" + item.vd_Lessons.vd_Files.Ext + "/" + x.UniqueId.ToString()) : "#")> @(item.vd_Lessons.Name)
+                        @if (x.IsReadByUser == true)
+                        {
+                            <i class="material-icons" style="color:white;">check</i>
+                        }
+                    </a>
+                }
+                else
+                {
+                    <a class="link" style="pointer-events: none;" href="#"><b>@(item.vd_Lessons.Name)</b><br /><small><i style="color:#ff8d00">@("Активация: " +x.ActivationDate.Value.Date.ToShortDateString() + " " + x.ActivationDate.Value.TimeOfDay)</i></small></a>
+                }
+            }
+            else
+            {
+                <a  href="@Url.Action("Register", "ru",new { course = myUserCourse.vd_Courses.UrlName})"><b>@(item.vd_Lessons.Name)</b><br /><small><i style="color:#ff8d00">Требуется подписка на полный курс</i></small></a>
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+}
+<h2>Users</h2>
+
+
+@foreach (var item in HTTPMediaPlayer.Models.GlobalModel.LoggedInUsers)
+{
+ 
+<div><span>@item.Key</span>:<span>@item.Value.LoginName</span></div><br />
+}

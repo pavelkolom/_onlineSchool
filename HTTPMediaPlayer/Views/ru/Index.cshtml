@@ -1,0 +1,766 @@
+﻿@using HTTPMediaPlayer.Models;
+@{
+  ViewBag.Title = "Index";
+}
+@*<style>
+    .white-text-with-brown-shadow {
+  text-shadow: 1px 1px 2px black, 0 0 1em gray, 0 0 0.2em gray;
+}
+</style>*@
+<div class="page-header header-filter header-small" filter-color="purple" data-parallax="true" style="background-image: url('../../Content/img/bg10.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-center">
+                <h2 class="white-text-with-brown-shadow"><b>МАСТЕРСКАЯ АНЧЕ</b></h2>
+                <h4 class="white-text-with-brown-shadow">Языки и писательство на одной платформе</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main main-raised">
+    @*<div class="subscribe-line">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="title"></h3>
+                <p>
+                    DU WAYS - это информационно-образовательная платформа, помогающая получить знания и навыки необходимые для эммиграции. Как выучить язык, найти работу, устроить детей в сад или школу, открыть собственный бизнес. Это и многое другое вы узнаете из наших курсов и информационных рассылок.
+                </p>
+            </div>
+            <div class="col-md-6" >
+                <h3 class="title">
+                    Подпишись на актуальные вакансии и новости!
+                </h3>
+                <div class="card card-plain card-form-horizontal">
+                    <div class="card-body">
+                        <form method="" action="">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="material-icons">mail</i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Ваш Email...">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" class="btn btn-primary btn-round btn-block">Подписаться</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>*@
+    <div class="container">
+        <div class="section">
+            <div class="row">
+                <div class="col-md-12 ml-auto mr-auto text-center">
+                    <div>
+                        <ul class="nav nav-pills nav-pills-primary" >
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#pill2" data-toggle="tab">Говорить</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pill3" data-toggle="tab">Писать</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pill1" data-toggle="tab">Полезности</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-content tab-space">
+                        <div class="tab-pane" id="pill1">
+                            <!--     *********    PROJECT     *********      -->
+                            <div class="projects-4 text-left" id="projects-4" style="padding:0px!important;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-8 ml-auto mr-auto text-center">
+                                            @*<h2 class="title">Бесплатные материалы</h2>*@
+                                            @*<h5 class="description"> Бесплатные мини-курсы английского. Проверьте, как это работает! </h5>*@
+                                            <div class="section-space"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-rose">
+                                                    <i class="material-icons">dashboard</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                    <div class="description">
+                                                        Done for 21 – наиболее эффективная система трекинга привычек, достижения целей и продвижения.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-success">
+                                                    <i class="material-icons">code</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                    <div class="description">
+                                                        <p style="text-align: left;"><span style="font-weight: 400;"><a href="~/Content/img/Habbit_21.png" target="_blank">Habbit 21</a></span><span style="font-weight: 400;">&ndash; универсальный и эффективный трекер привычек</span></p>
+                                                        <p style="text-align: left;"><span style="font-weight: 400;"><a href="~/Content/img/Target_21.png" target="_blank">Target 21</a></span> <span style="font-weight: 400;">&ndash; трекер шагов по достижению целей и выполнению крупных задач</span></p>
+                                                        <p style="text-align: left;"><span style="font-weight: 400;"><a href="~/Content/img/Forward_21.png" target="_blank">Forward 21</a></span><span style="font-weight: 400;"> &ndash; трекер работы с таймером для серьезного прогресса в больших проектах</span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-info">
+                                                    <i class="material-icons">timeline</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">ДЛИТЕЛЬНОСТЬ</h4>
+                                                    <div class="description">
+                                                        21 день
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 mr-auto">
+                                            <div class="card card-background" style="background-image:url('@("../Content/img/video/" + "21" +".jpg")')">
+                                                @*<a href="@Url.Action("Course", "ru",new { name = GlobalModel.FreeCourses[i].UrlName })"></a>*@
+                                                <div class="card-body">
+                                                    <span class="badge badge-success">3 трекера</span>
+                                                    <a href="@Url.Action("DoneFor21", "ru")">
+                                                        <h3 class="card-title">Done For 21</h3>
+                                                    </a>
+                                                    <p class="card-description">
+                                                        Done for 21 – наиболее эффективная система трекинга привычек, достижения целей и продвижения.
+                                                        <a href="@Url.Action("DoneFor21", "ru")" class="card-description">
+                                                            Подробнее
+                                                        </a>
+                                                    </p>
+                                                    <div class="row">
+                                                        <div class="col-md-12 ml-auto mr-auto">
+                                                            <a href="@Url.Action("DoneFor21", "ru")" class="btn  btn-success btn-primary btn-lg">
+                                                                <i class="material-icons">check</i> Получить
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    @for (int i = 0; i < GlobalModel.FreeCourses.Count; i++)
+                                    {
+                                        if (i % 2 == 0)
+                                        {
+                                        <div class="row">
+                                            <div class="col-md-5 ml-auto">
+                                                <div class="card card-background" style="background-image:url('@("../Content/img/video/" + GlobalModel.FreeCourses[i].UrlName +".jpg")')">
+                                                    @*<a href="@Url.Action("Register", "ru",new { course = Model.UrlName })"></a>*@
+                                                    <div class="card-body">
+                                                        <span class="badge badge-success">1 бесплатный урок</span>
+                                                        <a href="@Url.Action("Register", "ru",new { course = GlobalModel.FreeCourses[i].UrlName, istrial = 1 })">
+                                                            <h3 class="card-title">@(GlobalModel.FreeCourses[i].Name)</h3>
+                                                        </a>
+                                                        <p class="card-description">
+                                                            @(GlobalModel.FreeCourses[i].ShortDescription)
+                                                            <a href="@Url.Action("Course", "ru",new { name = GlobalModel.FreeCourses[i].UrlName })" class="card-description">
+                                                                 Подробнее
+                                                            </a>
+                                                        </p>
+                                                        <div class="row">
+                                                            <div class="col-md-12 ml-auto mr-auto">
+                                                                <a href="@Url.Action("Register", "ru",new { course = GlobalModel.FreeCourses[i].UrlName, istrial = 1 })" class="btn  btn-success btn-primary btn-lg">
+                                                                    <i class="material-icons">check</i> Записаться
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 mr-auto">
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-info">
+                                                        <i class="material-icons">dashboard</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.FreeCourses[i].ForWhom
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-primary">
+                                                        <i class="material-icons">code</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.FreeCourses[i].Contents
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-danger">
+                                                        <i class="material-icons">timeline</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ИЗ ЧЕГО СОСТОИТ</h4>
+                                                        <div class="description">
+                                                            @Html.Raw(GlobalModel.FreeCourses[i].Info)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        }
+                                        else
+                                        {
+                                        <div class="row">
+                                            <div class="col-md-5 ml-auto">
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-rose">
+                                                        <i class="material-icons">dashboard</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.FreeCourses[i].ForWhom
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-success">
+                                                        <i class="material-icons">code</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.FreeCourses[i].Contents
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-info">
+                                                        <i class="material-icons">timeline</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ИЗ ЧЕГО СОСТОИТ</h4>
+                                                        <div class="description">
+                                                            @Html.Raw(GlobalModel.FreeCourses[i].Info)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 mr-auto">
+                                                <div class="card card-background" style="background-image:url('@("../Content/img/video/" + GlobalModel.FreeCourses[i].UrlName +".jpg")')">
+                                                    @*<a href="@Url.Action("Course", "ru",new { name = GlobalModel.FreeCourses[i].UrlName })"></a>*@
+                                                    <div class="card-body">
+                                                        <span class="badge badge-success">1 бесплатный урок</span>
+                                                        <a href="@Url.Action("Register", "ru",new { course = GlobalModel.FreeCourses[i].UrlName, istrial = 1 })">
+                                                            <h3 class="card-title">@(GlobalModel.FreeCourses[i].Name)</h3>
+                                                        </a>
+                                                        <p class="card-description">
+                                                            @(GlobalModel.FreeCourses[i].ShortDescription)
+                                                            <a href="@Url.Action("Course", "ru",new { name = GlobalModel.FreeCourses[i].UrlName })" class="card-description">
+                                                                Подробнее
+                                                            </a>
+                                                        </p>
+                                                        <div class="row">
+                                                            <div class="col-md-12 ml-auto mr-auto">
+                                                                <a href="@Url.Action("Register", "ru",new { course = GlobalModel.FreeCourses[i].UrlName, istrial = 1 })" class="btn  btn-success btn-primary btn-lg">
+                                                                    <i class="material-icons">check</i> Записаться
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <!--     *********    END PROJECT      *********      -->
+                        </div>
+                        <div class="tab-pane active" id="pill2">
+                            <!--     *********    PROJECT     *********      -->
+                            <div class="projects-4 text-left" id="projects-4" style="padding:0px!important;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-8 ml-auto mr-auto text-center">
+                                            <div class="title">Языковые курсы для существенного прогресса с минимальными затратами</div>
+                                            <h5 class="description"></h5>
+                                            <div class="section-space"></div>
+                                        </div>
+                                    </div>
+                                    @for (int i = 0; i < GlobalModel.LanguageCourses.Count; i++)
+                                    {
+                                        if (i % 2 == 0)
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-5 ml-auto">
+                                                    <div class="card card-background" style="background-image:url('@("../Content/img/video/" + GlobalModel.LanguageCourses[i].UrlName +".jpg")')">
+                                                        @*<a href="@Url.Action("Course", "ru",new { name = GlobalModel.AdultsCourses[i].UrlName })"></a>*@
+                                                        <div class="card-body">
+                                                            <span class="badge badge-rose">полный курс 24 урока</span>
+                                                            <a href="@Url.Action("Register", "ru",new { course = GlobalModel.LanguageCourses[i].UrlName })">
+                                                                <h3 class="card-title">@(GlobalModel.LanguageCourses[i].Name)</h3>
+                                                            </a>
+                                                            <p class="card-description">
+                                                                @(GlobalModel.LanguageCourses[i].ShortDescription)
+                                                                <a href="@Url.Action("Course", "ru",new { name = GlobalModel.LanguageCourses[i].UrlName })" class="card-description">
+                                                                    Подробнее
+                                                                </a>
+                                                            </p>
+                                                            <div class="row">
+                                                                <div class="col-md-12 ml-auto mr-auto">
+                                                                    <a href="@Url.Action("Register", "ru",new { course = GlobalModel.LanguageCourses[i].UrlName })" class="btn  btn-success btn-primary btn-lg">
+                                                                        <i class="material-icons">payment</i> @("Купить за " + (GlobalModel.LanguageCourses[i].Price * 1.07).ToString() + " руб.")<sup>*</sup></a>
+                                                               </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 mr-auto">
+                                                    <div class="info info-horizontal">
+                                                        <div class="icon icon-info">
+                                                            <i class="material-icons">dashboard</i>
+                                                        </div>
+                                                        <div class="description">
+                                                            <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                            <div class="description">
+                                                                @GlobalModel.LanguageCourses[i].ForWhom
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info info-horizontal">
+                                                        <div class="icon icon-primary">
+                                                            <i class="material-icons">code</i>
+                                                        </div>
+                                                        <div class="description">
+                                                            <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                            <div class="description">
+                                                                @GlobalModel.LanguageCourses[i].Contents
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info info-horizontal">
+                                                        <div class="icon icon-danger">
+                                                            <i class="material-icons">timeline</i>
+                                                        </div>
+                                                        <div class="description">
+                                                            <h4 class="info-title">ИЗ ЧЕГО СОСТОИТ</h4>
+                                                            <div class="description">
+                                                                @Html.Raw(GlobalModel.LanguageCourses[i].Info)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        }
+                                        else
+                                        {
+                                            <div class="row">
+                                                <div class="col-md-5 ml-auto">
+                                                    <div class="info info-horizontal">
+                                                        <div class="icon icon-rose">
+                                                            <i class="material-icons">dashboard</i>
+                                                        </div>
+                                                        <div class="description">
+                                                            <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                            <div class="description">
+                                                                @GlobalModel.LanguageCourses[i].ForWhom
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info info-horizontal">
+                                                        <div class="icon icon-success">
+                                                            <i class="material-icons">code</i>
+                                                        </div>
+                                                        <div class="description">
+                                                            <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                            <div class="description">
+                                                                @GlobalModel.LanguageCourses[i].Contents
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="info info-horizontal">
+                                                        <div class="icon icon-info">
+                                                            <i class="material-icons">timeline</i>
+                                                        </div>
+                                                        <div class="description">
+                                                            <h4 class="info-title">ИЗ ЧЕГО СОСТОИТ</h4>
+                                                            <div class="description">
+                                                                @Html.Raw(GlobalModel.LanguageCourses[i].Info)
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5 mr-auto">
+                                                    <div class="card card-background" style="background-image:url('@("../Content/img/video/" + GlobalModel.LanguageCourses[i].UrlName +".jpg")')">
+                                                        @*<a href="@Url.Action("Course", "ru",new { name = GlobalModel.AdultsCourses[i].UrlName })"></a>*@
+                                                        <div class="card-body">
+                                                            <span class="badge badge-rose">полный курс 24 урока</span>
+                                                            <a href="@Url.Action("Register", "ru",new { course = GlobalModel.LanguageCourses[i].UrlName })">
+                                                                <h3 class="card-title">@(GlobalModel.LanguageCourses[i].Name)</h3>
+                                                            </a>
+                                                            <p class="card-description">
+                                                                @(GlobalModel.LanguageCourses[i].ShortDescription)
+                                                                <a href="@Url.Action("Course", "ru",new { name = GlobalModel.LanguageCourses[i].UrlName })" class="card-description">
+                                                                    Подробнее
+                                                                </a>
+                                                            </p>
+                                                            <div class="row">
+                                                                <div class="col-md-12 ml-auto mr-auto">
+                                                                    <a href="@Url.Action("Register", "ru",new { course = GlobalModel.LanguageCourses[i].UrlName })" class="btn  btn-success btn-primary btn-lg">
+                                                                        <i class="material-icons">payment</i> @("Купить за " + (GlobalModel.LanguageCourses[i].Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        }
+                                    }
+                                    <sup>*</sup> Сумма указана с учетом комиссии при условии оплаты банковской картой. При изменении способа оплаты взимаемая комиссия может измениться.
+                                </div>
+                            </div>
+                            <!--     *********    END PROJECT      *********      -->
+                        </div>
+                        <div class="tab-pane" id="pill3">
+                            <!--     *********    PROJECT     *********      -->
+                            <div class="projects-4 text-left" id="projects-4" style="padding:0px!important;">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-8 ml-auto mr-auto text-center">
+                                            <div class="title">Писательская мастерская Анче Колла</div>
+                                            @*<h5 class="description"> Курсы для детей </h5>*@
+                                            <div class="section-space"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5 ml-auto">
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-rose">
+                                                    <i class="material-icons">dashboard</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                    <div class="description">
+                                                        Ваш идеальный план работы над книгой любого жанра.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-success">
+                                                    <i class="material-icons">code</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                    <div class="description">
+                                                        Пошаговое руководство написания вашего произведения от идеи до готовой к печати
+                                                        рукописи. Подсказки, советы и структурные описания для эффективной и увлекательной работы
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="info info-horizontal">
+                                                <div class="icon icon-info">
+                                                    <i class="material-icons">timeline</i>
+                                                </div>
+                                                <div class="description">
+                                                    <h4 class="info-title">ИЗ ЧЕГО СОСТОИТ</h4>
+                                                    <div class="description">
+                                                        1 файл с руководством о том, как написать книгу в срок от 1 недели до нескольких месяцев
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 mr-auto">
+                                            <div class="card card-background" style="background-image:url('@("../Content/img/video/" + "Plan_raboti_nad_knigoj" +".jpg")')">
+                                                @*<a href="@Url.Action("Course", "ru",new { name = GlobalModel.FreeCourses[i].UrlName })"></a>*@
+                                                <div class="card-body">
+                                                    <span class="badge badge-success">1 pdf-файл</span>
+                                                    @*<a href="@Url.Action("DoneFor21", "ru")">*@
+                                                        <h3 class="card-title">План работы над любой книгой</h3>
+                                                    @*</a>*@
+                                                    <p class="card-description">
+                                                        Ваш идеальный план работы над книгой любого жанра
+                                                        @*<a href="@Url.Action("DoneFor21", "ru")" class="card-description">*@
+                                                            @*Подробнее*@
+                                                        @*</a>*@
+                                                    </p>
+                                                    <div class="row">
+                                                        <div class="col-md-12 ml-auto mr-auto">
+                                                            @*<a href="@Url.Action("DoneFor21", "ru")" class="btn  btn-success btn-primary btn-lg">*@
+                                                            <a href="~/Downloads/План_работы_над_книгой.pdf" class="btn  btn-success btn-primary btn-lg" target="_blank">
+                                                                <i class="material-icons">check</i> Получить
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    @for (int i = 0; i < GlobalModel.WritingCourses.Count; i++)
+                                    {
+                                        if (i % 2 == 0)
+                                        {
+                                        <div class="row">
+                                            <div class="col-md-5 ml-auto">
+                                                <div class="card card-background" style="background-image:url('@("../Content/img/video/" + GlobalModel.WritingCourses[i].UrlName +".jpg")')">
+                                                    @*<a href="@Url.Action("Course", "ru",new { name = GlobalModel.AdultsCourses[i].UrlName })"></a>*@
+                                                    <div class="card-body">
+                                                        @*<span class="badge badge-rose">9 уроков</span>*@
+                                                        <a href="@Url.Action("Register", "ru",new { course = GlobalModel.WritingCourses[i].UrlName })">
+                                                            <h3 class="card-title">@(GlobalModel.WritingCourses[i].Name)</h3>
+                                                        </a>
+                                                        <p class="card-description">
+                                                            @(GlobalModel.WritingCourses[i].ShortDescription)
+                                                            <a href="@Url.Action("Course", "ru",new { name = GlobalModel.WritingCourses[i].UrlName })" class="card-description">
+                                                                Подробнее
+                                                            </a>
+                                                        </p>
+                                                        <div class="row">
+                                                            <div class="col-md-12 ml-auto mr-auto">
+                                                                @if (GlobalModel.WritingCourses[i].HasPackages == true)
+                                                                {
+                                                                <a href="@Url.Action("Course", "ru", new { name = GlobalModel.WritingCourses[i].UrlName })" class="btn  btn-success btn-primary btn-lg">
+                                                                    <i class="material-icons">payment</i> Записаться
+                                                                    @*@("Купить от " + (GlobalModel.WritingCourses[i].Price * 1.07).ToString() + " руб.")<sup>*</sup>*@
+                                                                </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                <a href="@Url.Action("Register", "ru", new { course = GlobalModel.WritingCourses[i].UrlName })" class="btn  btn-success btn-primary btn-lg">
+                                                                    <i class="material-icons">payment</i> @("Купить за " + (GlobalModel.WritingCourses[i].Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                                                </a>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 mr-auto">
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-info">
+                                                        <i class="material-icons">dashboard</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.WritingCourses[i].ForWhom
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-primary">
+                                                        <i class="material-icons">code</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.WritingCourses[i].Contents
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-danger">
+                                                        <i class="material-icons">timeline</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ИЗ ЧЕГО СОСТОИТ?</h4>
+                                                        <div class="description">
+                                                            @Html.Raw(GlobalModel.WritingCourses[i].Info)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <hr>
+                                        }
+                                        else
+                                        {
+                                        <div class="row">
+                                            <div class="col-md-5 ml-auto">
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-rose">
+                                                        <i class="material-icons">dashboard</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">СОДЕРЖАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.WritingCourses[i].ForWhom
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-success">
+                                                        <i class="material-icons">code</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ОПИСАНИЕ</h4>
+                                                        <div class="description">
+                                                            @GlobalModel.WritingCourses[i].Contents
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="info info-horizontal">
+                                                    <div class="icon icon-info">
+                                                        <i class="material-icons">timeline</i>
+                                                    </div>
+                                                    <div class="description">
+                                                        <h4 class="info-title">ИЗ ЧЕГО СОСТОИТ</h4>
+                                                        <div class="description">
+                                                            @Html.Raw(GlobalModel.WritingCourses[i].Info)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5 mr-auto">
+                                                <div class="card card-background" style="background-image:url('@("../Content/img/video/" + GlobalModel.WritingCourses[i].UrlName +".jpg")')">
+                                                    @*<a href="@Url.Action("Course", "ru",new { name = GlobalModel.AdultsCourses[i].UrlName })"></a>*@
+                                                    <div class="card-body">
+                                                        @*<span class="badge badge-rose">полный курс 24 урока</span>*@
+                                                        <a href="@Url.Action("Register", "ru",new { course = GlobalModel.WritingCourses[i].UrlName })">
+                                                            <h3 class="card-title">@(GlobalModel.WritingCourses[i].Name)</h3>
+                                                        </a>
+                                                        <p class="card-description">
+                                                            @(GlobalModel.WritingCourses[i].ShortDescription)
+                                                            <a href="@Url.Action("Course", "ru",new { name = GlobalModel.WritingCourses[i].UrlName })" class="card-description">
+                                                                Подробнее
+                                                            </a>
+                                                        </p>
+                                                        <div class="row">
+                                                            <div class="col-md-12 ml-auto mr-auto">
+                                                                @if (GlobalModel.WritingCourses[i].HasPackages == true)
+                                                                {
+                                                                    <a href="@Url.Action("Course", "ru", new { name = GlobalModel.WritingCourses[i].UrlName })" class="btn  btn-success btn-primary btn-lg">
+                                                                        <i class="material-icons">payment</i> Записаться
+                                                                        @*@("Купить от " + (GlobalModel.WritingCourses[i].Price * 1.07).ToString() + " руб.")<sup>*</sup>*@
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="@Url.Action("Register", "ru", new { course = GlobalModel.WritingCourses[i].UrlName })" class="btn  btn-success btn-primary btn-lg">
+                                                                        <i class="material-icons">payment</i> @("Купить за " + (GlobalModel.WritingCourses[i].Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                                                    </a>
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            <hr>
+                                        }
+                                    }
+                                    <sup>*</sup> Сумма указана с учетом комиссии при условии оплаты банковской картой. При изменении способа оплаты взимаемая комиссия может измениться.
+                                </div>
+                            </div>
+                            <!--     *********    END PROJECT      *********      -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="display:none">
+            <h3 class="title">Плюшки</h3>
+            @for (int i = 0; i < GlobalModel.FreeCourses.Count; i++)
+            {
+                if (i == 0)
+                {
+                @Html.Raw("<div class='row'>");
+                }
+                else if (i % 3 == 0)
+                {
+                @Html.Raw("</div><div class='row'>");
+                }
+
+            <div class="col-md-4">
+                <div class="card card-plain card-blog">
+                    <div class="card-header card-header-image">
+                        <a href="@Url.Action("Course", "ru",new { name = GlobalModel.FreeCourses[i].UrlName })">
+                            <img class="img img-raised" src='@("../Content/img/video/" + GlobalModel.FreeCourses[i].UrlName +".jpg")'>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        @*<h6 class="card-category text-danger">
+                            <i class="material-icons">trending_up</i> Enterprise
+                        </h6>*@
+                        <h4 class="card-title">
+                            <a href="@Url.Action("Course", "ru",new { name = GlobalModel.FreeCourses[i].UrlName })">@GlobalModel.FreeCourses[i].Name</a>
+                        </h4>
+                        <p class="card-description">
+                            @(GlobalModel.FreeCourses[i].ShortDescription).<a href="@Url.Action("Course", "ru", new { name = GlobalModel.FreeCourses[i].UrlName })"> Узнать больше </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+                if (i == GlobalModel.FreeCourses.Count - 1)
+                {
+                @Html.Raw("</div>");
+                }
+
+            }
+        </div>
+
+        <div class="section" style="display:none;">
+            <h3 class="title">Другие плюшки</h3>
+            @for (int i = 0; i < GlobalModel.NotFreeCourses.Count; i++)
+            {
+                if (i == 0)
+                {
+                @Html.Raw("<div class='row'>");
+                }
+                else if (i % 3 == 0)
+                {
+                @Html.Raw("</div><div class='row'>");
+                }
+
+            <div class="col-md-4">
+                <div class="card card-plain card-blog">
+                    <div class="card-header card-header-image">
+                        <a href="@Url.Action("Course", "ru",new { name = GlobalModel.NotFreeCourses[i].UrlName })">
+                            <img class="img img-raised" src='@("../Content/img/video/" + GlobalModel.NotFreeCourses[i].UrlName +".jpg")'>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        @*<h6 class="card-category text-danger">
+                            <i class="material-icons">trending_up</i> Enterprise
+                        </h6>*@
+                        <h4 class="card-title">
+                            <a href="@Url.Action("Course", "ru",new { name = GlobalModel.NotFreeCourses[i].UrlName })">@GlobalModel.NotFreeCourses[i].Name</a>
+                        </h4>
+                        <p class="card-description">
+                            @(GlobalModel.NotFreeCourses[i].ShortDescription).<a href="@Url.Action("Course", "ru",new { name = GlobalModel.NotFreeCourses[i].UrlName })"> Подробнее </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+                if (i == GlobalModel.NotFreeCourses.Count - 1)
+                {
+                @Html.Raw("</div>");
+                }
+
+            }
+        </div>
+
+    </div>
+    @*<iframe src="https://docs.google.com/viewer?url=http://www.pdf995.com/samples/pdf.pdf&embedded=true" frameborder="0" height="500px" width="100%"></iframe>*@
+
+</div>
+

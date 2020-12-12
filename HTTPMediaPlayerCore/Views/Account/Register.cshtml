@@ -1,0 +1,526 @@
+﻿@using HTTPMediaPlayerCore.Models;
+@using HTTPMediaPlayerCore.Services;
+@model LoginModel
+@{
+  ViewBag.Title = "Register";
+  Layout = null;
+  var countryService = new CountryService();
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="apple-touch-icon" sizes="76x76" href="~/img/favicon.png">
+    <title>Подписка</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    @*<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />*@
+    <link rel="icon" type="image/png" href="~/img/favicon.png" />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+    <!-- CSS Files -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/material-bootstrap-wizard.css" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="~/css/demo.css" rel="stylesheet" />
+    <link href="~/css/login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="image-container set-full-height" style="background: linear-gradient(60deg,rgba(225,190,231,.56),rgba(186,104,200,.55)),url('../../img/wizard-profile.jpg')">
+        <!--   Creative Tim Branding   -->
+        @*<a href="http://creative-tim.com">
+                <div class="logo-container">
+                    <div class="logo">
+                        <img src="assets/img/new_logo.png">
+                    </div>
+                    <div class="brand">
+                        Creative Tim
+                    </div>
+                </div>
+            </a>*@
+        <!--  Made With Material Kit  -->
+        @*<a href="http://demos.creative-tim.com/material-kit/index.html?ref=material-bootstrap-wizard" class="made-with-mk">
+                <div class="brand">MK</div>
+                <div class="made-with">Made with <strong>Material Kit</strong></div>
+            </a>*@
+        <!--   Big container   -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <!-- Wizard container -->
+                    <div class="wizard-container">
+                        <div class="card wizard-card" data-color="purple" id="wizardProfile">
+                            @using (Html.BeginForm("", ""))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.course, new { value = Model.course, name = "course", id = "course" })
+                                @Html.HiddenFor(m => m.courseprice, new { value = Model.courseprice, name = "courseprice", id = "courseprice" })
+                                @Html.HiddenFor(m => m.id, new { value = Model.course, name = "userid", id = "userid" })
+                                @Html.HiddenFor(m => m.istrial, new { value = Model.istrial, name = "istrial", id = "istrial" })
+                                @Html.HiddenFor(m => m.isdigitaldownload, new { value = Model.isdigitaldownload, name = "isdigitaldownload", id = "isdigitaldownload" })
+                                @Html.HiddenFor(m => m.needsdelivery, new { value = Model.needsdelivery, name = "needsdelivery", id = "needsdelivery" })
+                                <div class="login-box register-loader-bg">
+                                    <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                                    <p>
+                                        Регистрация. Пожалуйста, ждите...
+                                    </p>
+                                </div>
+
+                                <!-- You can switch " data-color="purple" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+                                <div class="wizard-header">
+                                    <h3 class="wizard-title">
+                                        Подписка
+                                    </h3>
+                                    <h5>Эта информация позволит нам узнать о вас больше и открыть доступ к ресурсу.</h5>
+                                </div>
+                                <div class="wizard-navigation">
+                                    <ul id="feedtab">
+                                        <li id="abt"><a href="#about" data-toggle="tab">Оформление подписки</a></li>
+                                        @*<li id="add"><a href="#address" data-toggle="tab">Адрес</a></li>*@
+                                        @*<li id="acc"><a href="#account"  data-toggle="tab">Оплата</a></li>*@
+                                    </ul>
+                                </div>
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="about">
+                                        <div class="row">
+                                            @*<h4 class="info-text"> Начнем с основной информации</h4>*@
+                                            <div class="col-sm-5 col-sm-offset-1">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">face</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Имя <small>(обязательно)</small></label>
+                                                        @*<input name="firstname" type="text" class="form-control">*@
+                                                        @Html.TextBoxFor(a => a.name, new { @class = "form-control", placeholder = "", id = "name" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">record_voice_over</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Фамилия <small>@(Model.needsdelivery == "option1" ? "(обязательно)" : "(необязательно)")</small></label>
+                                                        @*<input name="lastname" type="text" class="form-control">*@
+                                                        @Html.TextBoxFor(a => a.surname, new { @class = "form-control", placeholder = "", id = "surname" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5 col-sm-offset-1">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">group</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Отчество <small>@(Model.needsdelivery == "option1" ? "(обязательно)" : "(необязательно)")</small></label>
+                                                        @*<input name="email" type="email" class="form-control">*@
+                                                        @Html.TextBoxFor(a => a.fathername, new { @class = "form-control", placeholder = "", id = "fathername" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">email</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Email <small>(обязательно)</small></label>
+                                                        @*<input name="email" type="email" class="form-control">*@
+                                                        @Html.TextBoxFor(a => a.email, new { @class = "form-control", placeholder = "", id = "email" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-10 col-sm-offset-1">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">call</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Номер телефона <small>@(Model.needsdelivery == "option1" ? "(обязательно)" : "(необязательно)")</small></label>
+                                                        @*<input name="email" type="email" class="form-control">*@
+                                                        @Html.TextBoxFor(a => a.phone, new { @class = "form-control", placeholder = "", id = "phone" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5 col-sm-offset-1">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">language</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Страна <small>@(Model.needsdelivery == "option1" ? "(обязательно)" : "(необязательно)")</small></label>
+                                                        @Html.DropDownListFor(m => m.countryId,
+                                                       new SelectList(countryService.CountryOptions,
+                                                       "Key", "Value", countryService.SelectedCountry), new { @class = "form-control", name = "countryId", id = "countryId" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">business</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Город <small>@(Model.needsdelivery == "option1" ? "(обязательно)" : "(необязательно)")</small></label>
+                                                        @*<input type="text" class="form-control">*@
+                                                        @Html.TextBoxFor(a => a.city, new { @class = "form-control", placeholder = "", id = "city" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @if (Model.needsdelivery == "option1")
+                                            {
+                                                <div class="col-sm-4 col-sm-offset-1">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">info</i>
+                                                        </span>
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Индекс <small>@(Model.needsdelivery == "option1" ? "(обязательно)" : "(необязательно)")</small></label>
+                                                            @*<input type="text" class="form-control">*@
+                                                            @Html.TextBoxFor(a => a.zip, new { @class = "form-control", placeholder = "", id = "zip", name = "zip" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i class="material-icons">home</i>
+                                                        </span>
+                                                        <div class="form-group label-floating">
+                                                            <label class="control-label">Адрес <small>@(Model.needsdelivery == "option1" ? "(обязательно)" : "(необязательно)")</small></label>
+                                                            @*<input type="text" class="form-control">*@
+                                                            @Html.TextBoxFor(a => a.address, new { @class = "form-control", placeholder = "", id = "address", name = "address" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                            <div class="col-sm-3 col-sm-offset-1">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">apps</i>
+                                                    </span>
+                                                    <div class="form-group label-floating">
+                                                        
+                                                        <img alt="Captcha" src="@Url.Action("CaptchaImage")" style="" />
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="material-icons">check_circle</i>
+                                                    </span>
+
+                                                    <div class="form-group label-floating">
+                                                        <label class="control-label">Результат <small>(обязательно)</small></label>
+                                                        @Html.TextBoxFor(model => model.captcha, new { @class = "form-control", placeholder = "", id = "captcha" })
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="tab-pane" id="address">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <h4 class="info-text"> Где вы находитесь? </h4>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="wizard-footer">
+                                    <div class="col-xs-12">
+                                        <div class="error-div" style="display:none;">
+                                            <i class="fa fa-warning">&nbsp;</i> <span style="font-size: 0.95em;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="pull-right">
+                                        <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Следующая' />
+                                        @if (Model.istrial == 1)
+                                        {
+                                            <input type="button" class='btn btn-finish btn-fill btn-success btn-wd verify-login' name='finish' value='Получить' onclick="Register();" />
+                                        }
+                                        else
+                                        {
+                                            <input type="button" id="paybutton" class='btn btn-finish btn-fill btn-success btn-wd verify-login' name='finish' value='@("Оплатить " + ((int)Model.courseprice*1.07).ToString() + " руб. *" )' onclick="Register();" />
+                                        }
+                                    </div>
+                                    <div class="pull-left">
+                                        <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Предыдущая' />
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div style='@(Model.istrial == 1 ? "display:none;" : "")'>
+                                        <div id="commentlabel" style="display:none;"><sup>*</sup> Сумма указана с учетом комиссии при условии оплаты банковской картой. При изменении способа оплаты взимаемая комиссия может измениться.</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div> <!-- wizard container -->
+                </div>
+            </div><!-- end row -->
+        </div> <!--  big container -->
+        <div class="footer">
+            <div class="container text-center">
+                @*Made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>. Free download <a href="http://www.creative-tim.com/product/bootstrap-wizard">here.</a>*@
+            </div>
+        </div>
+        <!--   Core JS Files   -->
+        <script src="~/js/core/jquery.min.js" type="text/javascript"></script>
+        @*"assets/js/jquery-2.2.4.min.js"*@
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="~/js/jquery.bootstrap.js" type="text/javascript"></script>
+        <!--  Plugin for the Wizard -->
+        <script src="~/js/material-bootstrap-wizard.js"></script>
+        <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+
+        <script src="~/js/custom.script.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+            function ShowLabel() {
+                $('#commentlabel').show();
+            }
+            function HideLabel() {
+                $('#commentlabel').hide();
+            }
+            $(document).ready(function () {
+
+                var observer = new MutationObserver(function (mutations) {
+                    if ($('#paybutton').css('display') == 'none') {
+                        HideLabel();
+                    }
+                    else {
+                        ShowLabel();
+                    }
+                });
+
+                var target = document.querySelector('#paybutton');
+                if (target != null) {
+                    observer.observe(target, {
+                        attributes: true
+                    });
+                }
+
+                if($("#userid").val() != 0)
+                {
+                    //$('#acc').remove();
+                    $('#feedtab a[href="#account"]').tab('show');
+                    $('#name').prop('readonly', true);
+                    $('#surname').prop('readonly', true);
+                    $('#email').prop('readonly', true);
+                    $('#phone').prop('readonly', true);
+                    $('#countryId').prop('disabled', true);
+                    $('#city').prop('readonly', true);
+                    $('#address').prop('readonly', true);
+                    //$('.register-loader-bg').show();
+                    //Register();
+                }
+
+
+                var res = getParameterByName('res', window.location.href);
+                if (res == 'regfailed') {
+                    $('.error-div span').text('Registration error');
+                    $('.error-div').show();
+                    var count = 3, speed = 100;
+                    var fIn = function () { $(this).fadeIn(speed, fOut); };
+                    var fOut = function () { if (--count > 0) $(this).fadeOut(speed, fIn); };
+                    $('.error-div').fadeOut(speed, fIn);
+                    $('.register-loader-bg').hide();
+                }
+
+                $('.verify-login').click(function () {
+                    //$('.register-loader-bg').show();
+                    $('.error-div').hide();
+                });
+            });
+
+            var needsdelivery = $("#needsdelivery").val();
+
+            var $validator1;
+            if(needsdelivery == "option1"){
+                $validator1 = $('.wizard-card form').validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    address: {
+                        required: true,
+                        minlength: 3
+                    },
+                    zip: {
+                        required: true,
+                        minlength: 3
+                    },
+                    captcha: {
+                        required: true,
+                        minlength: 1
+                    },
+                    countryId: {
+                        required: true,
+                        minlength: 1
+                    },
+                    city: {
+                        required: true,
+                        minlength: 1
+                    },
+                    surname: {
+                        required: true,
+                        minlength: 1
+                    },
+                    fathername: {
+                        required: true,
+                        minlength: 1
+                    },
+                    email: {
+                        required: true,
+                        minlength: 3,
+                    },
+                    phone: {
+                        required: true,
+                        minlength: 3,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                    }
+                },
+
+                errorPlacement: function (error, element) {
+                    $(element).parent('div').addClass('has-error');
+                }
+            });
+            }
+            else {
+                $validator1 = $('.wizard-card form').validate({
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 3
+                    },
+                    address: {
+                        required: false,
+                        minlength: 3
+                    },
+                    captcha: {
+                        required: true,
+                        minlength: 1
+                    },
+                    countryId: {
+                        required: true,
+                        minlength: 0
+                    },
+                    surname: {
+                        required: false,
+                        minlength: 1
+                    },
+                    email: {
+                        required: true,
+                        minlength: 3,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                    }
+                },
+
+                errorPlacement: function (error, element) {
+                    $(element).parent('div').addClass('has-error');
+                }
+            });
+            }
+            function Register() {
+                var $valid = $('.wizard-card form').valid();
+
+
+
+                if (!$valid) {
+                    $validator1.focusInvalid();
+                    return false;
+                }
+                $('.register-loader-bg').show();
+
+
+                var model = {
+                    userid: $("#userid").val(),
+                    course: $("#course").val(),
+                    courseprice: $("#courseprice").val(),
+                    name: $("#name").val(),
+                    fathername: $("#fathername").val(),
+                    istrial: $("#istrial").val(),
+                    surname: $("#surname").val(),
+                    email: $("#email").val(),
+                    captcha: $("#captcha").val(),
+                    phone: $("#phone").val(),
+                    password: $("#pwd").val(),
+                    countryId: $("#countryId").val(),
+                    city: $("#city").val(),
+                    address: $("#address").val(),
+                    zip: $("#zip").val(),
+                    isdigitaldownload: $("#isdigitaldownload").val()
+            };
+                var regmodel = model;//JSON.stringify(model);
+                
+                
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Subscribe", "Account")',
+                    contentType: "application/x-www-form-urlencoded",
+                    data: regmodel,
+                    success: function (result) {
+                        
+                        if (result.Success)
+                        { // this sets the value from the response
+                                if (result.Result == "Activation") {
+                                    var url = "../ru/Activation?user=" + result.UserId + "&course=" + result.CourseId;
+                                    window.location.href = url;
+                                }
+                                if (result.Result == "Success") {
+                                    var url = "../ru/Success?user=" + result.UserId + "&course=" + result.CourseId;
+                                    window.location.href = url;
+                                }
+                                if (result.Result == "Purchase") {
+                                
+                                    var url = result.Redirect;
+
+                                    url = url.replace(/&amp;/g, '&');
+                                
+                                    window.location.href = url;
+                                }
+                        }
+                        else {
+                            $('.login-loader-bg').hide();
+                            $('.error-div span').text(result.Result);
+                            $('.error-div').show();
+                            var count = 3, speed = 100;
+                            var fIn = function () { $(this).fadeIn(speed, fOut); };
+                            var fOut = function () { if (--count > 0) $(this).fadeOut(speed, fIn); };
+                            $('.error-div').fadeOut(speed, fIn);
+                            $('.register-loader-bg').hide();
+
+                        }
+                    },
+                    error: function (e) {
+                        $('.login-loader-bg').hide();
+                        $('.error-div span').text('Registration error');
+                        $('.error-div').show();
+                        var count = 3, speed = 100;
+                        var fIn = function () { $(this).fadeIn(speed, fOut); };
+                        var fOut = function () { if (--count > 0) $(this).fadeOut(speed, fIn); };
+                        $('.error-div').fadeOut(speed, fIn);
+                        $('.register-loader-bg').hide();
+
+                    }
+                });
+            }
+        </script>
+    </div>
+</body>
+</html>
+

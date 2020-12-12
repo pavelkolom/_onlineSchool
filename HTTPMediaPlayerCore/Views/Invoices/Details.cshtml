@@ -1,0 +1,114 @@
+﻿@model HTTPMediaPlayerCore.Models.Order
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<div class="container">
+    <div class="indexcontent">
+        <div class="recommended-info">
+            <h3>Квитанция</h3>
+        </div>
+        <div>
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Text)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Text)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreationDateTime)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CreationDateTime)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IsPaid)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IsPaid)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PaymentDateTime)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PaymentDateTime)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ResultResponse)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ResultResponse)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Sum)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Sum)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IncSum)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IncSum)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Fee)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Fee)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.SignatureValue)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.SignatureValue)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PaymentMethod)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PaymentMethod)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IsTest)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IsTest)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EMail)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EMail)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.User)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.User.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CreatedByUserId)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CreatedByUserId)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

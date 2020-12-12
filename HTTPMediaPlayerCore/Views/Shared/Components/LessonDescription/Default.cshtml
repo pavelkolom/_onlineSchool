@@ -1,0 +1,12 @@
+﻿@using Microsoft.EntityFrameworkCore;
+
+@model HTTPMediaPlayerCore.Models.Lesson
+
+@if (Model != null)
+    {
+        var text = Model.Text;
+        if (text != null)
+        {
+            @Html.Raw(text)
+        }
+    }

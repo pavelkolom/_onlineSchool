@@ -1,0 +1,53 @@
+﻿@model HTTPMediaPlayerCore.Models.Order
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container">
+    <div class="indexcontent">
+        <div class="recommended-info">
+            <h3>Создать квитанцию</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                    <div class="form-group">
+                        <label for="description" class="bmd-label-floating">Описание квитанции</label>
+                        @Html.TextAreaFor(a => a.Text, new { @class = "form-control", id = "description" })
+                        <span class="bmd-help">За какие услуги выписывается квитанция </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="bmd-label-floating">Email</label>
+                        @Html.TextBoxFor(a => a.EMail, new { @class = "form-control", id = "description", @autocomplete="off" })
+                        <span class="bmd-help">Email пользователя для отправки квитанции </span>
+                    </div>                    
+                    
+                    <div class="form-group">
+                        <label for="description" class="bmd-label-floating">Сумма</label>
+                        @Html.TextBoxFor(a => a.Sum, new { @class = "form-control", id = "description", @autocomplete="off" })
+                        <span class="bmd-help">Сумма квитанции </span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Создать" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Назад к списку</a>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

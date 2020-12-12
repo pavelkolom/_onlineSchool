@@ -1,0 +1,106 @@
+﻿@model int
+@using HTTPMediaPlayer.Models;
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<link href="~/Content/css/dashboardpage.css" rel="stylesheet" />
+<style>
+.card .card-header.card-header-image a {
+    display: block;
+}
+</style>
+<div class="container">
+    <div class="indexcontent">
+        <div class="recommended-info">
+            <h3>Мои курсы</h3>
+        </div>
+        <div class="main-grids">
+            @using (HTTPMediaPlayer.Models.DB.videodbEntities db = new HTTPMediaPlayer.Models.DB.videodbEntities())
+    {
+        HTTPMediaPlayer.Models.DB.vd_Users user = db.vd_Users.FirstOrDefault(c => c.Id == Model);
+        for (int i = 0; i < user.vd_UserCourses.Count; i++)
+        {
+            if (i == 0)
+            {
+                @Html.Raw("<div class='row'>");
+            }
+            else if (i % 3 == 0)
+            {
+                @Html.Raw("</div><div class='row'>");
+            }
+
+                @*<div class="col-md-3 resent-grid recommended-grid slider-top-grids">
+
+                    <div class="resent-grid-img recommended-grid-img">
+                        <a href="@(user.vd_UserCourses.ToArray()[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = user.vd_UserCourses.ToArray()[i].Id, userId = user.vd_UserCourses.ToArray()[i].UserId, courseId = user.vd_UserCourses.ToArray()[i].CourseId }) : "#")"><img src='@("../../Content/img/video/" + user.vd_UserCourses.ToArray()[i].vd_Courses.UrlName + ".jpg")' alt="" /></a>
+
+                    </div>
+                    <div class="resent-grid-info recommended-grid-info">
+                        <h3><a href="@(user.vd_UserCourses.ToArray()[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = user.vd_UserCourses.ToArray()[i].Id, userId = user.vd_UserCourses.ToArray()[i].UserId, courseId = user.vd_UserCourses.ToArray()[i].CourseId }) : "#")" class="title title-info">@(user.vd_UserCourses.ToArray()[i].vd_Courses.Name)</a></h3>
+                        @(user.vd_UserCourses.ToArray()[i].IsActivated == true ? "" : "(Not Activated)")
+                        <ul>
+                            <li><p class="author author-info"><a href="#" class="author">@user.vd_UserCourses.ToArray()[i].vd_Courses.vd_Users.Name</a></p></li>
+
+                        </ul>
+                    </div>
+                    </div>*@
+                @*<div class="col-md-3 resent-grid recommended-grid slider-top-grids">
+                    <div class="card card-blog">
+                        <div class="card-header card-header-image">
+                            <a href="@(user.vd_UserCourses.ToArray()[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = user.vd_UserCourses.ToArray()[i].Id, userId = user.vd_UserCourses.ToArray()[i].UserId, courseId = user.vd_UserCourses.ToArray()[i].CourseId }) : "#")">
+                                <img class="img" src='@("../../Content/img/video/" + user.vd_UserCourses.ToArray()[i].vd_Courses.UrlName + ".jpg")'>
+                                <div class="card-title">
+                                    @(user.vd_UserCourses.ToArray()[i].vd_Courses.Name)
+                                </div>
+                            </a>
+                            <div class="colored-shadow" style="background-image: url(@("../../Content/img/video/" + user.vd_UserCourses.ToArray()[i].vd_Courses.UrlName + ".jpg")); opacity: 1;"></div>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-category text-info">Курс</h6>
+                            <p class="card-description">
+                                @(user.vd_UserCourses.ToArray()[i].vd_Courses.ShortDescription)
+                            </p>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="col-md-4">
+                    <div class="card card-blog">
+                        <div class="card-header card-header-image">
+                            <a href="@(user.vd_UserCourses.ToArray()[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = user.vd_UserCourses.ToArray()[i].Id, userId = user.vd_UserCourses.ToArray()[i].UserId, courseId = user.vd_UserCourses.ToArray()[i].CourseId }) : "#")">
+                                <img class="img" src="@("../../Content/img/video/" + user.vd_UserCourses.ToArray()[i].vd_Courses.UrlName + ".jpg")">
+                            </a>
+                            <div class="colored-shadow" style="background-image: url(&quot;@("../../Content/img/video/" + user.vd_UserCourses.ToArray()[i].vd_Courses.UrlName + ".jpg")&quot;); opacity: 1;"></div>
+                        </div>
+                        <div class="card-body ">
+                            <h6 class="card-category text-danger">
+                                <i class="material-icons">trending_up</i> Курс
+                            </h6>
+                            <h4 class="card-title">
+                                <a href="@(user.vd_UserCourses.ToArray()[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = user.vd_UserCourses.ToArray()[i].Id, userId = user.vd_UserCourses.ToArray()[i].UserId, courseId = user.vd_UserCourses.ToArray()[i].CourseId }) : "#")">@(user.vd_UserCourses.ToArray()[i].vd_Courses.Name)</a>
+                            </h4>
+                        </div>
+                        <div class="card-footer ">
+                            <div class="author">
+                                <a href="@(user.vd_UserCourses.ToArray()[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = user.vd_UserCourses.ToArray()[i].Id, userId = user.vd_UserCourses.ToArray()[i].UserId, courseId = user.vd_UserCourses.ToArray()[i].CourseId }) : "#")">
+                                    <img src="~/Content/img/anchekolla.png" alt="..." class="avatar img-raised">
+                                    <span>@user.vd_UserCourses.ToArray()[i].vd_Courses.vd_Users.Name</span>
+                                </a>
+                            </div>
+                            <div class="stats ml-auto">
+                                <i class="material-icons">schedule</i>уроков: @user.vd_UserCourses.ToArray()[i].vd_Courses.vd_CourseLessons.Count
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    if (i == user.vd_UserCourses.Count - 1)
+                    {
+                    @Html.Raw("</div>");
+                    }
+                    }
+                    }
+                    <div class="clearfix"> </div>
+                </div>
+    </div>
+</div>
+@section scripts {}

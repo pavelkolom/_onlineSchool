@@ -1,0 +1,85 @@
+﻿@model int
+@using HTTPMediaPlayerCore.Models;
+@using Microsoft.EntityFrameworkCore;
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<link href="~/css/dashboardpage.css" rel="stylesheet" />
+<style>
+    .card .card-header.card-header-image a {
+        display: block;
+    }
+</style>
+<div class="container">
+    <div class="indexcontent">
+        <div class="recommended-info">
+            <h3>Мои курсы</h3>
+        </div>
+        <div class="main-grids">
+            @using (HTTPMediaPlayerCore.Models.DuwaysContext db = new HTTPMediaPlayerCore.Models.DuwaysContext(new DbContextOptions<DuwaysContext>() { }))
+            {
+                HTTPMediaPlayerCore.Models.User user = db.User.FirstOrDefault(c => c.Id == Model);
+                List<HTTPMediaPlayerCore.Models.UserCourse> courses = await db.UserCourse.Where(c => c.UserId == user.Id).ToListAsync();
+                for (int i = 0; i < courses.Count; i++)
+                {
+                    HTTPMediaPlayerCore.Models.AuthorCourse courseAuthor = await db.AuthorCourse.FirstOrDefaultAsync(c => c.CourseId == courses[i].CourseId);
+                    List<HTTPMediaPlayerCore.Models.CourseLesson> courseLessons = await db.CourseLesson.Where(c => c.CourseId == courses[i].Id).ToListAsync();
+                    if (i == 0)
+                    {
+                        @Html.Raw("<div class='row'>");
+                    }
+                    else if (i % 3 == 0)
+                    {
+                        @Html.Raw("</div><div class='row'>");
+                    }
+
+                    <div class="col-md-4">
+                        <div class="card card-blog">
+                            <div class="card-header card-header-image">
+                                <a href="@(courses[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = courses[i].Id, userId = courses[i].UserId, courseId = courses[i].CourseId }) : "#")">
+                                    <img class="img" src="@("/Authors/" + courseAuthor.AuthorId + "/" + courseAuthor.CourseId + ".jpg")">
+                                </a>
+                                <div class="colored-shadow" style="background-image: url(&quot;@("/Authors/" + courseAuthor.AuthorId + "/" + courseAuthor.CourseId + ".jpg")&quot;); opacity: 1;"></div>
+                            </div>
+                            <div class="card-body ">
+                                <h6 class="card-category text-danger">
+                                    <i class="material-icons">trending_up</i> Курс
+                                </h6>
+                                <h4 class="card-title">
+                                    @*@if (courseAuthor.Course.IsBook != true)
+                                    {*@
+                                        <a href="@(courses[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = courses[i].Id, userId = courses[i].UserId, courseId = courses[i].CourseId }) : "#")">@(courseAuthor.Course.Name)</a>
+                                    @*}*@
+                                    @*else
+                                    {
+
+                                        <a href="@(courses[i].IsActivated == true ? ("/api/sample/"  + courseAuthor.UserId + "/" + x.UniqueId.ToString()) + "/" + course.AuthorId + "/" + lesson.FileId + "/" + Model.UserId : "#")">@(courseAuthor.Course.Name)</a>
+                                    }*@
+                                </h4>
+                            </div>
+                            <div class="card-footer ">
+                                <div class="author">
+                                    <a href="@(courses[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = courses[i].Id, userId = courses[i].UserId, courseId = courses[i].CourseId }) : "#")">
+                                        <img src='@("/Authors/" + courseAuthor.AuthorId + "/dp.jpg")' alt="..." class="avatar img-raised">
+                                        <span>@courseAuthor.Author.WorkShopName</span>
+                                    </a>
+                                </div>
+                                <div class="stats ml-auto">
+                                    <i class="material-icons">schedule</i> @(courseAuthor.Course.LessonNumber + " " + courseAuthor.Course.LessonName)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    if (i == courses.Count - 1)
+                    {
+                        @Html.Raw("</div>");
+                    }
+                }
+            }
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+

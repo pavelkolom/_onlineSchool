@@ -1,0 +1,18 @@
+﻿@using Microsoft.EntityFrameworkCore;
+
+@model UserCourseItem
+
+@if (Model != null)
+{
+    var text = Model.html;
+    if (text != null)
+    {
+        <link href="https://vjs.zencdn.net/7.4.1/video-js.css" rel="stylesheet" />
+        @Html.Raw(text)
+
+        <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+        <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
+        <script src="https://unpkg.com/videojs-flash/dist/videojs-flash.js"></script>
+        <script src="https://unpkg.com/videojs-contrib-hls/dist/videojs-contrib-hls.js"></script>
+    }
+}
