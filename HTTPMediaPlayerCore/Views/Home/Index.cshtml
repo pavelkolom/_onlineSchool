@@ -482,14 +482,10 @@
 </footer>
 
 @section scripts{
-    @*<script src="~/js/plugins/sweetalert2.js"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <script type="text/javascript">
-    $(document).ready(function () {
-        //swal("Успешно отправлено!", "Ваш запрос выполнен!", "success");
-    });
+
     function SendMessage() {
-        //$('.login-loader-bg').show();
         swal("Успешно отправлено!", "Ваш запрос выполнен!", "success");
         SendMessageAjax($('#name').val(), $('#email').val(), $('#msg').val());
     }
@@ -501,7 +497,7 @@
                 message: messageval
             };
 
-            var regmodel = model;//JSON.stringify(model);
+            var regmodel = model;
 
             $.ajax({
                 type: "POST",
@@ -509,27 +505,9 @@
                 contentType: "application/x-www-form-urlencoded",
                 data: regmodel,
                 success: function (result) {
-                    if (result.Success) { // this sets the value from the response
-                        //swal("Успешно отправлено!", "Ваш запрос выполнен!", "success");
-                        //$('.login-loader-bg').hide();
-                        //swal({
-                        //    type: 'success',
-                        //    html: 'Ссылка отправлена на почту: <strong>' +
-                        //        result.EmailVal +
-                        //        '</strong>',
-                        //    confirmButtonClass: 'btn btn-success',
-                        //    buttonsStyling: false
-                        //})
-                    }
-                    else {
-                        //$('.login-loader-bg').hide();
-                        //swal("Ошибка!", result.Result, "error");
-                    }
-                },
-                error: function (e) {
-                    //$('.login-loader-bg').hide();
-                    //swal("Ошибка!", "Что-то пошло не так", "error");
-                }
+                    if (result.Success) {}
+                    else {}
+                }, error: function (e) {}
             });
     }
     </script>

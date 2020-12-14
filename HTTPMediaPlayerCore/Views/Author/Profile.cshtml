@@ -223,7 +223,7 @@
     }
 
         function SendMessageAjax(nameval, emailval, messageval, authoremailval) {
-            alert(authoremailval + "!");
+            
             var model = {
                 name: nameval,
                 email: emailval,
@@ -231,35 +231,18 @@
                 authoremail: authoremailval
             };
 
-            var regmodel = model;//JSON.stringify(model);
 
+            //alert(JSON.stringify(model));
             $.ajax({
                 type: "POST",
-                url: '@Url.Action("SendMessage", "Author")',
+                url: '@Url.Action("SendMessageToAuthor", "Home")',
                 contentType: "application/x-www-form-urlencoded",
-                data: regmodel,
+                data: model,
                 success: function (result) {
-                    if (result.Success) { // this sets the value from the response
-                        //swal("Успешно отправлено!", "Ваш запрос выполнен!", "success");
-                        //$('.login-loader-bg').hide();
-                        //swal({
-                        //    type: 'success',
-                        //    html: 'Ссылка отправлена на почту: <strong>' +
-                        //        result.EmailVal +
-                        //        '</strong>',
-                        //    confirmButtonClass: 'btn btn-success',
-                        //    buttonsStyling: false
-                        //})
-                    }
-                    else {
-                        //$('.login-loader-bg').hide();
-                        //swal("Ошибка!", result.Result, "error");
-                    }
+                    if (result.Success) {}
+                    else {}
                 },
-                error: function (e) {
-                    //$('.login-loader-bg').hide();
-                    //swal("Ошибка!", "Что-то пошло не так", "error");
-                }
+                error: function (e) {}
             });
     }
     </script>

@@ -55,9 +55,23 @@ namespace HTTPMediaPlayerCore.Controllers
       }
     }
 
+        [HttpPost]
+        public async Task<IActionResult> SendMessageToAuthor(string name, string email, string message, string authoremail)
+        {
+            try
+            {
+                await new Mailer().SendMessageAsync("pavelkolom@gmail.com;" + authoremail, "Сообщение от DuWays", "от " + name + ", email: " + email + " сообщение: " + message, false);
+                string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(true, "Сообщение успешно отправлено", null));
+                return Content(serialized, "application/json");
+            }
+            catch (Exception ex)
+            {
+                string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(false, ex.Message, null));
+                return Content(serialized, "application/json");
+            }
+        }
 
 
 
-
-  }
+    }
 }
