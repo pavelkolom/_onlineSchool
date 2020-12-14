@@ -267,7 +267,7 @@ namespace HTTPMediaPlayerCore.Models
     [Column(TypeName = "NVARCHAR(20)")]
     public string ContactFormHeaderText { get; set; }
 
-    [Column(TypeName = "NVARCHAR(10)")]
+    [Column(TypeName = "NVARCHAR(30)")]
     public string ContactFormButtonText { get; set; }
     
     [Column(TypeName = "NVARCHAR(50)")]

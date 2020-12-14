@@ -343,13 +343,19 @@
                             <i class="material-icons text-warning">star</i>
                             <i class="material-icons text-warning">star</i>
                         </div>*@
-                        <div class="card-footer justify-content-center">
+                    <div class="card-footer justify-content-center">
+                        @if (Model.Author.VK != null)
+                        {
                             <a href='@(author.VK)' class="btn btn-just-icon btn-link btn-facebook">
                                 <i class="fa fa-vk"></i>
                             </a>
+                        }
+                        @if (Model.Author.Instagram != null)
+                        {
                             <a href='@(author.Instagram)' class="btn btn-just-icon btn-link btn-instagram">
                                 <i class="fa fa-instagram"></i>
                             </a>
+                        }
                         </div>
                     </div>
                 </div>
