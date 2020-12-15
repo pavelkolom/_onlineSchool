@@ -1,0 +1,29 @@
+﻿- subscription for teacher -> need to understand approach
+- webinar room (live streaming) with scaling
+- upload files with and without compression, create desktop application
+- create cources/ create lesons, upload them
+- accept cash/transfer, activate users manually, open courses for users
+- analyse competitors -> prices on youtube, getcourse, 
+- create testing/quiz functionality
++ improve videostreaming, maybe implement chunks
+- performance analyzing -> deploy additional servers automatically
++ domain or category(teacher or school) - link
++ subject and subject category -> cources under subject category
+- main page category
+- multilanguage
++ go aspnet core
+
+- Список курсов по категориям с возможностью по клику перехода на страницу конкретного курса, 
+где будет его описание, программа, сроки и дата ближайшего старта.
+
+Личный кабинет user and author.
+
+Список купленных курсов 
+Ссылка на ближайшие - ? (ненавязчиво)
+
+Видео-урок
+Интерактив-поле для выполнения домашнего задания (тест, поле для произвольного текста, комбинация и того, и другого)
+Возможность проведения живого эфира - вебинара, в определенное время
+(во время эфира комментарии, поле вопросов, возможность включения презентации (на экране презентация, в углу - спикер)
+Возможность хранения материалов - презентаций, документов, воркбуков (пдф и фото и текстовые материалы).
+Кнопка запроса поддержки (если что-то не так или нужно задать вопрос).

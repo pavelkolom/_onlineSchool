@@ -42,7 +42,7 @@
                                                 if (Model.Course.HasTrial == true)
                                                 {<a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName, istrial = 1 }) class="btn btn-primary btn-round"> Попробовать</a>
                                                 }
-                                            <a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName }) class="btn btn-primary btn-round"> Купить за @(Model.Course.Price * 1.07) Руб.</a>
+                                                <a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName }) class="btn btn-primary btn-round"> Купить за @(Model.Course.Price * 1.07) Руб.</a><sup>*</sup>
                                             }
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                                             @(Math.Round(item.Price * 1.07)) Руб.
                                                         </h2>
                                                         @Html.Raw(item.Info)
-                                                        <a href="@Url.Action("Register", "Account", new { course = item.UrlName })" class="btn btn-primary btn-round">
+                                                        <a href="@Url.Action("Register", "Account", new { course = item.UrlName })" class="btn btn-primary btn-round"><sup>*</sup>
                                                             Купить
                                                         </a>
                                                     </div>
@@ -107,23 +107,24 @@
                                     <a href="@Url.Action(Model.Author.AuthorUrl, "Author")" class="btn btn-info">УЗНАТЬ БОЛЬШЕ</a>
                                 </div>
                                 @*<div class="footer">
-                                        <i class="material-icons text-warning">star</i>
-                                        <i class="material-icons text-warning">star</i>
-                                        <i class="material-icons text-warning">star</i>
-                                        <i class="material-icons text-warning">star</i>
-                                        <i class="material-icons text-warning">star</i>
-                                    </div>*@
+                        <i class="material-icons text-warning">star</i>
+                        <i class="material-icons text-warning">star</i>
+                        <i class="material-icons text-warning">star</i>
+                        <i class="material-icons text-warning">star</i>
+                        <i class="material-icons text-warning">star</i>
+                    </div>*@
                                 @*<div class="card-footer justify-content-center">
-                                        <a href="https://vk.com/anchetakolomeitseva" class="btn btn-just-icon btn-link btn-facebook">
-                                            <i class="fa fa-vk"></i>
-                                        </a>
-                                        <a href="https://instagram.com/ancheta_k?igshid=ax8264q04l86" class="btn btn-just-icon btn-link btn-instagram">
-                                            <i class="fa fa-instagram"></i>
-                                        </a>
-                                    </div>*@
+                        <a href="https://vk.com/anchetakolomeitseva" class="btn btn-just-icon btn-link btn-facebook">
+                            <i class="fa fa-vk"></i>
+                        </a>
+                        <a href="https://instagram.com/ancheta_k?igshid=ax8264q04l86" class="btn btn-just-icon btn-link btn-instagram">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>*@
                             </div>
                         </div>
                     </div>
+                    <sup>*</sup> Сумма указана с учетом комиссии при условии оплаты банковской картой. При изменении способа оплаты взимаемая комиссия может измениться.
 
                 </div>
             </div>

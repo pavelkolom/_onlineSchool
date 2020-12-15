@@ -9,6 +9,7 @@ using HTTPMediaPlayerCore.Models;
 using Microsoft.AspNetCore.Http;
 using HTTPMediaPlayerCore.Services;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Caching.Memory;
 
 
 namespace HTTPMediaPlayerCore.Controllers
@@ -16,15 +17,30 @@ namespace HTTPMediaPlayerCore.Controllers
   public class HomeController : Controller
   {
     private readonly ICourseService _courseService;
+    private IMemoryCache _cache;
 
-    public HomeController(ICourseService courceService)
+    public HomeController(ICourseService courceService, IMemoryCache memoryCache)
     {
       _courseService = courceService;
+      _cache = memoryCache;
     }
 
     public async Task<IActionResult> Index()
     {
-      return View(await _courseService.GetCourceCategoryContainer(3, true));
+      PageContainerMain cacheEntry;
+      if (!_cache.TryGetValue("mainpagecontainer", out cacheEntry))
+      {
+        cacheEntry = await _courseService.GetMainPageContainer();
+        // Set cache options.
+        var cacheEntryOptions = new MemoryCacheEntryOptions()
+            // Keep in cache for this time, reset time if accessed.
+            .SetSlidingExpiration(TimeSpan.FromSeconds(1800));
+
+        // Save data in cache.
+        _cache.Set("mainpagecontainer", cacheEntry, cacheEntryOptions);
+      }
+
+        return View(cacheEntry);
     }
 
     public IActionResult Privacy()
@@ -48,30 +64,30 @@ namespace HTTPMediaPlayerCore.Controllers
         string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(true, "Сообщение успешно отправлено", null));
         return Content(serialized, "application/json");
       }
-      catch(Exception ex)
+      catch (Exception ex)
       {
         string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(false, ex.Message, null));
         return Content(serialized, "application/json");
       }
     }
 
-        [HttpPost]
-        public async Task<IActionResult> SendMessageToAuthor(string name, string email, string message, string authoremail)
-        {
-            try
-            {
-                await new Mailer().SendMessageAsync("pavelkolom@gmail.com;" + authoremail, "Сообщение от DuWays", "от " + name + ", email: " + email + " сообщение: " + message, false);
-                string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(true, "Сообщение успешно отправлено", null));
-                return Content(serialized, "application/json");
-            }
-            catch (Exception ex)
-            {
-                string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(false, ex.Message, null));
-                return Content(serialized, "application/json");
-            }
-        }
-
-
-
+    [HttpPost]
+    public async Task<IActionResult> SendMessageToAuthor(string name, string email, string message, string authoremail)
+    {
+      try
+      {
+        await new Mailer().SendMessageAsync("pavelkolom@gmail.com;" + authoremail, "Сообщение от DuWays", "от " + name + ", email: " + email + " сообщение: " + message, false);
+        string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(true, "Сообщение успешно отправлено", null));
+        return Content(serialized, "application/json");
+      }
+      catch (Exception ex)
+      {
+        string serialized = JsonConvert.SerializeObject(new PasswordRecoveryModel(false, ex.Message, null));
+        return Content(serialized, "application/json");
+      }
     }
+
+
+
+  }
 }

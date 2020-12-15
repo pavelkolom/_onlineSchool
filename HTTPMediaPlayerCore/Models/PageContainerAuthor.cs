@@ -6,20 +6,17 @@ using HTTPMediaPlayerCore.Services;
 
 namespace HTTPMediaPlayerCore.Models
 {
-  public class CourceCategoryContainer
+  public class PageContainerAuthor
   {
     public Author Author { get; private set; }
     public string AuthorPageHTML { get; private set; }
     public List<Category> Categories { get; private set; }
 
-    public List<Author> AuthorsSection { get; private set; }
-
-    public CourceCategoryContainer(Author author, List<Category> categories, string authorPageHTML, List<Author> authorsSection)
+    public PageContainerAuthor(Author author, List<Category> categories, string authorPageHTML)
     {
       AuthorPageHTML = authorPageHTML;
       Author = author;
       Categories = categories;
-      AuthorsSection = authorsSection;
     }
   }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using HTTPMediaPlayerCore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace HTTPMediaPlayerCore.Services
 {
@@ -16,9 +17,11 @@ namespace HTTPMediaPlayerCore.Services
 
     public Task<List<Course>> GetFreeCourses();
 
-    public Task<CourceCategoryContainer> GetCourceCategoryContainer(int authorId, bool incluemainpageAuthors);
+    public Task<PageContainerAuthor> GetAuthorPageContainer(int authorId);
 
-    public Task<CourceCategoryContainer> GetCourceCategoryContainer(string authorUrl, bool incluemainpageAuthors);
+    public Task<PageContainerAuthor> GetAuthorPageContainer(string authorUrl);
+    
+    public Task<PageContainerMain> GetMainPageContainer();
 
     public Task<Course> GetCourseByURL(string url_name);
 
@@ -66,6 +69,19 @@ namespace HTTPMediaPlayerCore.Services
   public class CourseService : ICourseService
   {
     private DuwaysContext dbcontext = new DuwaysContext(new DbContextOptions<DuwaysContext>() { });
+    private IConfiguration _configuration;
+    private string[] _authors;
+    private string[] _bestSellers;
+    private string[] _recommendedCourses;
+
+
+    public CourseService(IConfiguration configuration)
+    {
+      _configuration = configuration;
+      _authors = _configuration["MainPageAuthors"].Split(new char[] { ',' });
+      _bestSellers = _configuration["BestSellers"].Split(new char[] { ',' });
+      _recommendedCourses = _configuration["RecommendedCourses"].Split(new char[] { ',' });
+    }
 
     public async Task<bool> ActivateUserCourse(int courseid, int userid)
     {
@@ -404,7 +420,7 @@ namespace HTTPMediaPlayerCore.Services
       }
     }
 
-    public async Task<CourceCategoryContainer> GetCourceCategoryContainer(int authorId, bool incluemainpageAuthors)
+    public async Task<PageContainerAuthor> GetAuthorPageContainer(int authorId)
     {
       var author = await GetAuthor(authorId);
 
@@ -418,25 +434,12 @@ namespace HTTPMediaPlayerCore.Services
           readText = await System.IO.File.ReadAllTextAsync(path);
         }
       }
-      List<Author> authors = new List<Author>();
-      if(incluemainpageAuthors)
-      {
-        foreach(int id in GlobalStats.Authors)
-        {
-          Author a = await dbcontext.Author.FirstOrDefaultAsync(au => au.Id == id);
-          if (author != null) authors.Add(a);
-        }
-      }
 
-      var container = new CourceCategoryContainer(author, GlobalStats.Categories, readText, authors);
+      var container = new PageContainerAuthor(author, GlobalStats.Categories, readText);
       return container;
     }
 
-
-
-
-
-    public async Task<CourceCategoryContainer> GetCourceCategoryContainer(string authorUrl, bool incluemainpageAuthors)
+    public async Task<PageContainerAuthor> GetAuthorPageContainer(string authorUrl)
     {
       var author = await GetAuthor(authorUrl);
       string readText = "";
@@ -450,17 +453,43 @@ namespace HTTPMediaPlayerCore.Services
         }
       }
 
-      List<Author> authors = new List<Author>();
-      if (incluemainpageAuthors)
-      {
-        foreach (int id in GlobalStats.Authors)
-        {
-          Author a = await dbcontext.Author.FirstOrDefaultAsync(au => au.Id == id);
-          if (author != null) authors.Add(a);
-        }
-      }
-      var container = new CourceCategoryContainer(author, GlobalStats.Categories, readText, authors);
+      var container = new PageContainerAuthor(author, GlobalStats.Categories, readText);
       return container;
     }
+
+
+
+
+    public async Task<PageContainerMain> GetMainPageContainer()
+    {
+     
+      List<Author> authors = new List<Author>();
+        foreach (string id in _authors)
+        {
+          int authId = Convert.ToInt32(id);
+          Author a = await dbcontext.Author.FirstOrDefaultAsync(au => au.Id == authId);
+          if (a != null) authors.Add(a);
+        }
+
+      List<AuthorCourse> bestSellers = new List<AuthorCourse>();
+      foreach (string id in _bestSellers)
+      {
+        int courseId = Convert.ToInt32(id);
+        AuthorCourse a = await dbcontext.AuthorCourse.FirstOrDefaultAsync(au => au.CourseId == courseId);
+        if (a != null) bestSellers.Add(a);
+      }
+
+      List<AuthorCourse> recommended = new List<AuthorCourse>();
+      foreach (string id in _recommendedCourses)
+      {
+        int courseId = Convert.ToInt32(id);
+        AuthorCourse a = await dbcontext.AuthorCourse.FirstOrDefaultAsync(au => au.CourseId == courseId);
+        if (a != null) recommended.Add(a);
+      }
+
+      var container = new PageContainerMain(GlobalStats.Categories, authors, bestSellers, recommended);
+      return container;
+    }
+
   }
 }

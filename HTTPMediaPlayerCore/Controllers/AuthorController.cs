@@ -19,7 +19,7 @@ namespace HTTPMediaPlayerCore.Controllers
 
     public async Task<IActionResult> Profile(string name)
     {
-        return View(await _courseService.GetCourceCategoryContainer(name, false));
+        return View(await _courseService.GetAuthorPageContainer(name));
     }
   }
 }

@@ -1,15 +1,20 @@
-﻿@model CourceCategoryContainer
+﻿@model PageContainerAuthor
 
 @{
   ViewData["Title"] = "Author Profile Page";
 }
 <div class="profile-page">
-    <div class="page-header header-filter header-small" filter-color='@(Model.Author.Filter != null ? Model.Author.Filter.Name : "")' data-parallax="true" style='@(Model.Author.PersonalPageHeaderPic != null ? ("background-image: url('/Authors/" + Model.Author.Id + "/" + Model.Author.PersonalPageHeaderPic +"');") : "background-image: url('../img/kit/city.jpg")'>
+    <div class="page-header header-filter header-small" 
+         filter-color='@(Model.Author.Filter != null ? Model.Author.Filter.Name : "")' 
+         data-parallax="true" 
+         style='@(Model.Author.PersonalPageHeaderPic != null ? 
+      ("background-image: url('/Authors/" + Model.Author.Id + "/" + Model.Author.PersonalPageHeaderPic +"');") : 
+      "background-image: url('../img/kit/city.jpg")'>
         <div class="container">
             <div class="row">
                 <div class="col-md-8 ml-auto mr-auto text-center">
-                    <h2 class="white-text-with-brown-shadow"><b>@Model.Author.PersonalPageTitle</b></h2>@*ТВОРЧЕСКАЯ МАСТЕРСКАЯ АНЧЕ*@
-                    <h4 class="white-text-with-brown-shadow">@Model.Author.PersonalPageSlogan</h4>@*Литература и кино на одной платформе*@
+                    <h2 class="white-text-with-brown-shadow"><b>@Model.Author.PersonalPageTitle</b></h2>
+                    <h4 class="white-text-with-brown-shadow">@Model.Author.PersonalPageSlogan</h4>
                 </div>
             </div>
         </div>
@@ -22,7 +27,6 @@
                     <div class="col-md-6 ml-auto mr-auto">
                         <div class="profile">
                             <div class="avatar">
-                                @*<img src="@("../../img/author/" +  Model.AuthorInfo.UrlName + ".jpg")" alt="ancheta" class="img-raised rounded-circle img-fluid">*@
                                 <img src="@("/Authors/" + Model.Author.Id.ToString() + "/dp.jpg")" alt="@(Model.Author.WorkShopName)" class="img-raised rounded-circle img-fluid">
                             </div>
                             <div class="name">
@@ -46,8 +50,6 @@
                     <p>@Model.Author.Description</p>
                 </div>
 
-
-
                 <div class="container">
                     <div class="section-text">
                         <div class="row">
@@ -69,8 +71,6 @@
                     </div>
                 }
 
-
-
                 @foreach (var cat in Model.Categories)
                 {
                     if (Model.Author.AuthorCourses.Where(c => c.Course.CategoryId == cat.Id).Count() > 0)
@@ -90,9 +90,6 @@
                                                     </a>
                                                 </div>
                                                 <div class="card-body">
-                                                    @*<h6 class="card-category text-warning">
-                                                            <i class="material-icons">star</i>Избранное
-                                                        </h6>*@
                                                     <h4 class="card-title">
                                                         <a href="@Url.Action(item.Course.UrlName, "Course")">@(item.Course.Name)</a>
                                                     </h4>
@@ -123,6 +120,7 @@
                                                         }
                                                     </div>
                                                 </row>
+
                                             </div>
                                         </div>
                                     }
@@ -131,7 +129,10 @@
                         </div>
                     }
                 }
+                <sup>*</sup> Сумма указана с учетом комиссии при условии оплаты банковской картой. При изменении способа оплаты взимаемая комиссия может измениться.
+
             </div>
+        
         </div>
 
 
@@ -198,6 +199,8 @@
     <div class="container">
         <nav class="float-left">
             <ul>
+                @if(Model.Author.HasOwnRobokassa == true)
+                {
                 <li>
                     <a href="@("https://duways.com/Pages/" + Model.Author.Id + "/agreement.html")" target="_blank">
                         Согласие на обработку данных
@@ -208,6 +211,7 @@
                         Публичная оферта-договор
                     </a>
                 </li>
+                }
             </ul>
         </nav>
     </div>
@@ -231,8 +235,6 @@
                 authoremail: authoremailval
             };
 
-
-            //alert(JSON.stringify(model));
             $.ajax({
                 type: "POST",
                 url: '@Url.Action("SendMessageToAuthor", "Home")',

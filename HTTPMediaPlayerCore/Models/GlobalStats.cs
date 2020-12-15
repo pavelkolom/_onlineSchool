@@ -10,8 +10,6 @@ namespace HTTPMediaPlayerCore.Models
   {
     public static Dictionary<object, string> LoggedInUsers { get; } = new Dictionary<object, string>();
 
-    //public static Dictionary<string, VideoStream> UsersVideos { get; } = new Dictionary<string, VideoStream>();
-
     public static void OnSessionEnd(int? userId, int? sessionId)
     {
       if (userId != null && userId != 0)
@@ -54,8 +52,6 @@ namespace HTTPMediaPlayerCore.Models
     }
 
     private static List<Category> _categories = new List<Category>();
-
-    public static int[] Authors = new int[] { 3, 191, 199 };
 
     public static List<Category> Categories
     {
