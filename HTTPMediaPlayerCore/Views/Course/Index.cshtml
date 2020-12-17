@@ -39,10 +39,20 @@
                                         <div class="col-md-4 ml-auto mr-auto">
                                             @if (Model.Course.HasPackages != true)
                                             {
-                                                if (Model.Course.HasTrial == true)
-                                                {<a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName, istrial = 1 }) class="btn btn-primary btn-round"> Попробовать</a>
+                                                @*if (Model.Course.HasTrial == true)
+                                    {
+                                        <a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName, istrial = 1 }) class="btn btn-primary btn-round"> Попробовать</a>
+                                    }*@
+
+                                                @if (Model.Author.IsPayingRobokassaFee == true)
+                                                {
+                                                    <a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName }) class="btn btn-primary btn-round"> Купить за @(Model.Course.Price) Руб.</a>
                                                 }
-                                                <a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName }) class="btn btn-primary btn-round"> Купить за @(Model.Course.Price * 1.07) Руб.</a><sup>*</sup>
+                                                else
+                                                {
+                                                    <a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName }) class="btn btn-primary btn-round"> Купить за @(Model.Course.Price * 1.07) Руб.</a><sup>*</sup>
+                                                }
+                                                @*<a href=@Url.Action("Register", "Account", new { course = Model.Course.UrlName }) class="btn btn-primary btn-round"> Купить за @(Model.Course.Price * 1.07) Руб.</a><sup>*</sup>*@
                                             }
                                         </div>
                                     </div>
@@ -65,11 +75,24 @@
                                                 <div class="card card-pricing">
                                                     <div class="card-body ">
                                                         <h6 class="card-category text-success">@item.Name</h6>
-                                                        <h2 class="card-title">
-                                                            @(Math.Round(item.Price * 1.07)) Руб.
-                                                        </h2>
+
+                                                        @if (Model.Author.IsPayingRobokassaFee == true)
+                                                        {
+                                                            <h2 class="card-title">
+                                                                @Math.Round((decimal)item.Price).ToString() Руб.
+                                                            </h2>
+                                                        }
+                                                        else
+                                                        {
+                                                            <h2 class="card-title">
+                                                                @Math.Round(item.Price * 1.07).ToString(); Руб.
+                                                            </h2>
+                                                        }
+
+
                                                         @Html.Raw(item.Info)
-                                                        <a href="@Url.Action("Register", "Account", new { course = item.UrlName })" class="btn btn-primary btn-round"><sup>*</sup>
+                                                        <a href="@Url.Action("Register", "Account", new { course = item.UrlName })" class="btn btn-primary btn-round">
+                                                            <sup>*</sup>
                                                             Купить
                                                         </a>
                                                     </div>
@@ -124,11 +147,35 @@
                             </div>
                         </div>
                     </div>
-                    <sup>*</sup> Сумма указана с учетом комиссии при условии оплаты банковской картой. При изменении способа оплаты взимаемая комиссия может измениться.
-
+                    @if (Model.Author.IsPayingRobokassaFee != true)
+                    {
+                    <sup>*</sup> @("Сумма указана с учетом комиссии при условии оплаты банковской картой. При изменении способа оплаты взимаемая комиссия может измениться.")
+                    }
                 </div>
             </div>
         </div>
     </div>
 
 </div>
+
+<footer class="footer">
+    <div class="container">
+        <nav class="float-left">
+            <ul>
+                @if (Model.Author.HasOwnRobokassa == true)
+                {
+                    <li>
+                        <a href="@("https://duways.com/Pages/" + Model.Author.Id + "/agreement.html")" target="_blank">
+                            Согласие на обработку данных
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@("https://duways.com/Pages/" + Model.Author.Id + "/oferta.html")" target="_blank">
+                            Публичная оферта-договор
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+</footer>

@@ -203,6 +203,7 @@ namespace HTTPMediaPlayerCore.Controllers
           order.IsPaid = false;
           order.UserCourseId = userCource.Id;
           order.CourseId = course.Id;
+          order.AuthorId = course.AuthorId;
           order.CreationDateTime = DateTime.Now;
           order.UserId = user.Id;
           order.EMail = user.Email;

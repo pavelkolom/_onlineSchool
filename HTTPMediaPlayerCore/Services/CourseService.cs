@@ -259,6 +259,7 @@ namespace HTTPMediaPlayerCore.Services
         {
           UserCourse uc = new UserCourse();
           uc.CourseId = cs.Id;
+          uc.AuthorId = cs.AuthorId;
           uc.UserId = user.Id;
           uc.IsPaid = cs.Price == 0 ? true : false;
           uc.IsActivated = true;

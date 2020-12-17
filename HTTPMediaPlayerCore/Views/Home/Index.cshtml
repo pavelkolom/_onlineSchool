@@ -14,16 +14,12 @@
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto text-center">
                 <h2 class="white-text-with-brown-shadow"><b>ТЕРРИТОРИЯ ОНЛАЙН МАСТЕРСКИХ</b></h2>
-                @*<h4 class="white-text-with-brown-shadow"> Образовательная платформа для авторов и слушателей онлайн видео курсов</h4>*@
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-7 ml-auto mr-auto text-center">
-                @*<a href="#" class="btn btn-rose btn-primary btn-block btn-lg">
-                        Cтать автором и начать зарабатывать
-                    </a>*@
-                <button class="btn btn-rose btn-lg" data-toggle="modal" data-target="#loginModal">
+                <button class="btn btn-rose" data-toggle="modal" data-target="#loginModal">
                     Cтать автором и начать зарабатывать
                 </button>
             </div>
@@ -36,12 +32,6 @@
     <div class="modal-dialog modal-login" role="document">
         <div class="modal-content">
             <div class="card card-signup card-plain">
-                @*<div class="login-box login-loader-bg">
-                        <div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                        <p>
-                            Отправка...
-                        </p>
-                    </div>*@
                 <div class="modal-header">
                     <div class="card-header card-header-rose text-center">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="material-icons">clear</i></button>
@@ -196,9 +186,18 @@
                                                                         }
                                                                         else
                                                                         {
-                                                                            <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-rose">
-                                                                                <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price * 1.07).ToString() + " руб.")<sup>*</sup>
-                                                                            </a>
+                                                                            if (item.Author.IsPayingRobokassaFee == true)
+                                                                            {
+                                                                                <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-rose">
+                                                                                    <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price).ToString() + " руб.")
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-rose">
+                                                                                    <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                                                                </a>
+                                                                            }
                                                                         }
                                                                     </div>
                                                                 </row>
@@ -297,9 +296,22 @@
                                     }
                                     else
                                     {
-                                        <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-warning">
+                                        @*<a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-warning">
                                             <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price * 1.07).ToString() + " руб.")<sup>*</sup>
-                                        </a>
+                                        </a>*@
+
+                                        if (item.Author.IsPayingRobokassaFee == true)
+                                        {
+                                            <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-rose">
+                                                <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price).ToString() + " руб.")
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("Register", "Account", new { course = item.Course.UrlName })" style="width:100%;" class="btn btn-rose">
+                                                <i class="material-icons">payment</i> @("Купить за " + (item.Course.Price * 1.07).ToString() + " руб.")<sup>*</sup>
+                                            </a>
+                                        }
                                     }
                                 </div>
                             </row>
@@ -423,50 +435,6 @@
             </div>
         </div>
         <hr>
-        <ul class="social-buttons">
-            @*<li>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-facebook">
-                        <i class="fa fa-facebook-square"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble">
-                        <i class="fa fa-dribbble"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-google">
-                        <i class="fa fa-google-plus"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-youtube">
-                        <i class="fa fa-youtube-play"></i>
-                    </a>
-                </li>*@
-            @*<li>
-                    <a href="https://instagram.com/ancheta_k?igshid=ax8264q04l86">
-                        <img style=" height:25px;" src="~/img/insta.png" />
-                    </a>
-                </li>*@
-            @*<li>
-                    <a href="#pablo" class="btn btn-just-icon btn-link btn-facebook">
-                        <i class="fa fa-vk"></i>
-                    </a>
-                </li>*@
-        </ul>
-        @*<div class="copyright pull-center">
-                Copyright &#xA9;
-                <script>
-                    document.write(new Date().getFullYear())
-                </script> Creative Tim All Rights Reserved.
-            </div>*@
-
         <div class="copyright pull-center">
             &copy;
             <script>

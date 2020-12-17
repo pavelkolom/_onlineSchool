@@ -4,14 +4,16 @@ using HTTPMediaPlayerCore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HTTPMediaPlayerCore.Migrations
 {
     [DbContext(typeof(DuwaysContext))]
-    partial class DuwaysContextModelSnapshot : ModelSnapshot
+    [Migration("20201217132615_AddAuthorToUserCourseAndOrder")]
+    partial class AddAuthorToUserCourseAndOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,9 +108,6 @@ namespace HTTPMediaPlayerCore.Migrations
 
                     b.Property<string>("Instagram")
                         .HasColumnType("NVARCHAR(100)");
-
-                    b.Property<bool?>("IsPayingRobokassaFee")
-                        .HasColumnType("bit");
 
                     b.Property<string>("PersonalPageHTML")
                         .HasColumnType("NVARCHAR(MAX)");

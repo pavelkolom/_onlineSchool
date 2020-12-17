@@ -246,6 +246,8 @@ namespace HTTPMediaPlayerCore.Models
     public string YouTube { get; set; }
 
     public bool? HasOwnRobokassa { get; set; }
+    
+    public bool? IsPayingRobokassaFee { get; set; }
 
     [Column(TypeName = "NVARCHAR(30)")]
     public string RobokassaShopId { get; set; }
@@ -272,6 +274,7 @@ namespace HTTPMediaPlayerCore.Models
     
     [Column(TypeName = "NVARCHAR(50)")]
     public string ContactFormMessageBoxText { get; set; }
+
   }
 
   public class ActionType
@@ -557,6 +560,7 @@ namespace HTTPMediaPlayerCore.Models
     public int? UserId { get; set; }
     public User User { get; set; }
     public int? UserCourseId { get; set; }
+    public int? AuthorId { get; set; }
     public UserCourse UserCourse { get; set; }
     public int? CourseId { get; set; }
     public Course Course { get; set; }
@@ -574,7 +578,9 @@ namespace HTTPMediaPlayerCore.Models
     public User User { get; set; }
     public List<Order> Orders { get; set; }
     public int CourseId { get; set; }
-    public virtual Course Course { get; set; }
+    public Course Course { get; set; }
+    public int AuthorId { get; set; }
+
   }
 
   public class UserLesson
