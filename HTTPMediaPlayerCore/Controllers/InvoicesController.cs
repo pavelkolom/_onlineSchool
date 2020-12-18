@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using HTTPMediaPlayerCore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -22,12 +23,19 @@ namespace HTTPMediaPlayerCore.Controllers
       _configuration = configuration;
     }
 
-    [ServiceFilter(typeof(AdminCheck))]
+    [ServiceFilter(typeof(AuthorCheck))]
     // GET: Invoices
     public async Task<IActionResult> Index()
     {
-      var duwaysContext = _context.Order.Where(i => i.CourseId == null).Include(i => i.User);
-      return View(await duwaysContext.ToListAsync());
+      int? userId = HttpContext.Session.GetString("UserID") != null ? Convert.ToInt32(HttpContext.Session.GetString("UserID")) : null;
+
+      if (userId != null)
+      {
+        var duwaysContext = _context.Order.Where(i => i.CourseId == null && i.CreatedByUserId == userId).OrderByDescending(d => d.PaymentDateTime);
+        return View(await duwaysContext.ToListAsync());
+      }
+      else
+        return RedirectToAction("Index", "Dashboard");
     }
 
     // GET: Invoices/Details/5

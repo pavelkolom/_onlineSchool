@@ -34,8 +34,9 @@ namespace HTTPMediaPlayerCore
       services.AddSingleton<SubdomainRouteTransformer>();
 
       services.AddDbContext<DuwaysContext>();
-      services.AddScoped<SessionCheck>(); 
+      services.AddScoped<SessionCheck>();
       services.AddScoped<AdminCheck>();
+      services.AddScoped<AuthorCheck>();
 
       services.AddDistributedMemoryCache();
       services.AddDuwaysMvc();

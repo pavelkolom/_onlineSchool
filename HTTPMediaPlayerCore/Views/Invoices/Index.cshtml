@@ -5,109 +5,123 @@
     Layout = "~/Views/Shared/_DashboardLayout.cshtml";
 }
 
-<div class="container">
-    <div class="indexcontent">
-        <div class="recommended-info">
-            <h3>Квитанции</h3>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Квитанции </h2>
+            <p class="card-category">
+                <a asp-action="Create">Создать новую квитанцию</a>
+            </p>
         </div>
-        <p>
-            <a asp-action="Create">Создать новую квитанцию</a>
-        </p>
-        <table class="table" width="100%">
-            <thead>
-                <tr>
-                    <th>
-                        Создана
-                    </th>
-                    <th>
-                        Оплачена
-                    </th>
-                    <th>
-                        Сумма
-                    </th>
-                    <th>
-                        Сумма с комиссией
-                    </th>
-                    <th>
-                        Комиссия
-                    </th>
-                    <th>
-                        Метод платежа
-                    </th>
-                    <th>
-                        Тестовая
-                    </th>
-                    <th>
-                        Email
-                    </th>
-                    <th>
-                        Пользователь
-                    </th>
-                    <th>
-                        Создал
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td colspan="12">
-                        <b>
-                            Квитанция @Html.DisplayFor(modelItem => item.Id): @Html.DisplayFor(modelItem => item.Text)
-                        </b>
-                        <br />
-                        <b>
-                            @(item.IsPaid ? "Оплачена" : ("Ссылка на оплату: " + this.Context.Request.Scheme +
-                            "://" + this.Context.Request.Host.ToString() +
-                            "/Invoices/Pay/" + item.Id.ToString()))
-                        </b>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreationDateTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaymentDateTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sum)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IncSum)
-                    </td>
-                    <td>
-                        @(item.IncSum - item.Sum)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PaymentMethod)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsTest)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EMail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.User.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreatedByUserId)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-
+        <div class="card-body">
+            <table class="table" width="100%">
+                <thead>
+                    <tr>
+                        <th>
+                            Создана
+                        </th>
+                        <th>
+                            Оплачена
+                        </th>
+                        <th>
+                            Сумма
+                        </th>
+                        <th>
+                            Сумма с комиссией
+                        </th>
+                        <th>
+                            Комиссия
+                        </th>
+                        <th>
+                            Метод платежа
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td colspan="8">
+                                <b>
+                                    <span style="font-size:large">Квитанция @Html.DisplayFor(modelItem => item.Id): <b>@Html.DisplayFor(modelItem => item.Text)</b></span>
+                                </b>
+                                <br />
+                                @if (item.IsPaid)
+                                {
+                                    <b style="color: #28B463">Квитанция оплачена</b>
+                                }
+                                else
+                                {
+                                    <b style="color:red">Квитанция не оплачена</b><br /><br />
+                                    <b style="color:red">Ссылка на оплату:</b>
+                                    <input readonly style="width:300px;color: blue;" id="invlink" value="@(this.Context.Request.Scheme +
+                                "://" + this.Context.Request.Host.ToString() +
+                                "/Invoices/Pay/" + item.Id.ToString())" />
+                                    <button class="btn btn-primary" onclick="copyLink()">Копировать в буфер</button>
+                                    <button class="btn btn-primary" onclick="copyLink()">Отправить</button>
+                                   
+                                    <input style="width:200px;color: blue;" id="recipient" value="@item.EMail" />
+                                }
+                                <br />
+                                @if (item.IsTest == true)
+                                {
+                                    <b style="color:red">
+                                        @("ТЕСТОВАЯ КВИТАНЦИЯ")
+                                    </b>
+                                }
+                            </td>
+                        </tr>
+                        <tr style='@(item.IsTest == true ? "font-style:italic;color:red" : "")'>
+                            <td style="border-color:transparent !important">
+                                @Html.DisplayFor(modelItem => item.CreationDateTime)
+                            </td>
+                            <td style="border-color:transparent !important">
+                                @Html.DisplayFor(modelItem => item.PaymentDateTime)
+                            </td>
+                            <td style="border-color:transparent !important">
+                                @Html.DisplayFor(modelItem => item.Sum)
+                            </td>
+                            <td style="border-color:transparent !important">
+                                @Html.DisplayFor(modelItem => item.IncSum)
+                            </td>
+                            <td style="border-color:transparent !important">
+                                @(item.IncSum - item.Sum)
+                            </td>
+                            <td style="border-color:transparent !important">
+                                @Html.DisplayFor(modelItem => item.PaymentMethod)
+                            </td>
+                            <td style="border-color:transparent !important">
+                                @Html.DisplayFor(modelItem => item.EMail)
+                            </td>
+                            <td style="border-color:transparent !important">
+                                @*<a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Подробно</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>*@
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+@section scripts {
+
+    <script>
+        function copyLink() {
+            var copyText = document.getElementById("invlink");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            //alert("Copied the text: " + copyText.value);
+        }
+    </script>
+}
 
 
 
