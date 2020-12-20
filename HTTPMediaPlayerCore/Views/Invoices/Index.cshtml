@@ -62,9 +62,9 @@
                                 "://" + this.Context.Request.Host.ToString() +
                                 "/Invoices/Pay/" + item.Id.ToString())" />
                                     <button class="btn btn-primary" onclick="copyLink()">Копировать в буфер</button>
-                                    <button class="btn btn-primary" onclick="copyLink()">Отправить</button>
+                                    @*<button class="btn btn-primary" onclick="copyLink()">Отправить</button>
                                    
-                                    <input style="width:200px;color: blue;" id="recipient" value="@item.EMail" />
+                                    <input style="width:200px;color: blue;" id="recipient" value="@item.EMail" />*@
                                 }
                                 <br />
                                 @if (item.IsTest == true)
@@ -113,6 +113,14 @@
 @section scripts {
 
     <script>
+        $(document).ready(function () {
+            $("#invoices").addClass("active");
+            $('#workshoplink').attr('aria-expanded', 'true');
+            $('#workshopMenu').addClass('show');
+        });
+
+
+
         function copyLink() {
             var copyText = document.getElementById("invlink");
             copyText.select();

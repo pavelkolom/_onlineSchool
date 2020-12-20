@@ -55,7 +55,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item active">
+                    <li id="mycourses" class="nav-item">
                         <a class="nav-link" href="@Url.Action("Index", "Dashboard")">
                             <i class="material-icons">dashboard</i>
                             <p> Приобретенные курсы</p>
@@ -65,7 +65,7 @@
                         @if (Context.Session.GetString("IsAuthor") == true.ToString())
                         {
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="collapse" href="#workshopMenu">
+                                <a id="workshoplink" class="nav-link" data-toggle="collapse" href="#workshopMenu">
                                     <i class="material-icons">home</i>
                                     <p> Моя мастерская<b class="caret"></b></p>
                                 </a>
@@ -83,7 +83,7 @@
                                                 <span class="sidebar-normal"> Заказы </span>
                                             </a>
                                         </li>
-                                        <li class="nav-item ">
+                                        <li id="invoices" class="nav-item ">
                                             <a class="nav-link" href="@Url.Action("Index", "Invoices")">
                                                 <span class="sidebar-mini"> <i class="material-icons">receipt</i> </span>
                                                 <span class="sidebar-normal"> Квитанции </span>
@@ -96,9 +96,9 @@
                                             </a>
                                         </li>
                                         <li class="nav-item ">
-                                            <a class="nav-link" href="@Url.Action("AuthorProfile", "Dashboard")">
+                                            <a class="nav-link" href="@Url.Action("EditMyAuthorProfile", "Authors")">
                                                 <span class="sidebar-mini"> <i class="material-icons">person</i> </span>
-                                                <span class="sidebar-normal"> Мой профиль </span>
+                                                <span class="sidebar-normal"> Мой профиль автора </span>
                                             </a>
                                         </li>
                                     </ul>
@@ -106,7 +106,52 @@
                             </li>
 
                         }
-                    </ul>
+
+                        @if (Context.Session.GetString("IsAdmin") == true.ToString())
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="collapse" href="#adminMenu">
+                                        <i class="material-icons">build</i>
+                                        <p> Администратор<b class="caret"></b></p>
+                                    </a>
+                                    <div class="collapse" id="adminMenu">
+                                        <ul class="nav">
+                                            <li class="nav-item ">
+                                                <a class="nav-link" href="@Url.Action("MyUsers", "Dashboard")">
+                                                    <span class="sidebar-mini"> <i class="material-icons">groups</i> </span>
+                                                    <span class="sidebar-normal"> Все слушатели </span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link" href="@Url.Action("AuthorOrders", "Dashboard")">
+                                                    <span class="sidebar-mini"> <i class="material-icons">description</i> </span>
+                                                    <span class="sidebar-normal"> Все Заказы </span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link" href="@Url.Action("Index", "Invoices")">
+                                                    <span class="sidebar-mini"> <i class="material-icons">receipt</i> </span>
+                                                    <span class="sidebar-normal"> Все Квитанции </span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link" href="@Url.Action("AuthorCourses", "Dashboard")">
+                                                    <span class="sidebar-mini"> <i class="material-icons">school</i> </span>
+                                                    <span class="sidebar-normal"> Все Курсы </span>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item ">
+                                                <a class="nav-link" href="@Url.Action("Index", "Authors")">
+                                                    <span class="sidebar-mini"> <i class="material-icons">person</i> </span>
+                                                    <span class="sidebar-normal"> Все Авторы </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+
+                            }
+                        </ul>
             </div>
         </div>
 

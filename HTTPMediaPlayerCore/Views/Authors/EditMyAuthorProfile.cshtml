@@ -1,0 +1,166 @@
+﻿@model HTTPMediaPlayerCore.Models.Author
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Мой профиль автора </h2>
+            <p class="card-category">Редактирование
+                @*<a asp-action="Create">Создать новую квитанцию</a>*@
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="EditMyAuthorProfile">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="AuthorUrl" class="control-label"></label>
+                            <input asp-for="AuthorUrl" class="form-control" />
+                            <span asp-validation-for="AuthorUrl" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="WorkShopName" class="control-label"></label>
+                            <input asp-for="WorkShopName" class="form-control" />
+                            <span asp-validation-for="WorkShopName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="UserId" class="control-label"></label>
+                            <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PersonalPageTitle" class="control-label"></label>
+                            <input asp-for="PersonalPageTitle" class="form-control" />
+                            <span asp-validation-for="PersonalPageTitle" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PersonalPageSlogan" class="control-label"></label>
+                            <input asp-for="PersonalPageSlogan" class="form-control" />
+                            <span asp-validation-for="PersonalPageSlogan" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PersonalPageHeaderPic" class="control-label"></label>
+                            <input asp-for="PersonalPageHeaderPic" class="form-control" />
+                            <span asp-validation-for="PersonalPageHeaderPic" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PersonalPageHTML" class="control-label"></label>
+                            <input asp-for="PersonalPageHTML" class="form-control" />
+                            <span asp-validation-for="PersonalPageHTML" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FilterId" class="control-label"></label>
+                            <select asp-for="FilterId" class="form-control" asp-items="ViewBag.FilterName"></select>
+                            <span asp-validation-for="FilterId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Instagram" class="control-label"></label>
+                            <input asp-for="Instagram" class="form-control" />
+                            <span asp-validation-for="Instagram" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Facebook" class="control-label"></label>
+                            <input asp-for="Facebook" class="form-control" />
+                            <span asp-validation-for="Facebook" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="VK" class="control-label"></label>
+                            <input asp-for="VK" class="form-control" />
+                            <span asp-validation-for="VK" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="YouTube" class="control-label"></label>
+                            <input asp-for="YouTube" class="form-control" />
+                            <span asp-validation-for="YouTube" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HasOwnRobokassa" class="control-label"></label>
+                            <input asp-for="HasOwnRobokassa" class="form-control" />
+                            <span asp-validation-for="HasOwnRobokassa" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IsPayingRobokassaFee" class="control-label"></label>
+                            <input asp-for="IsPayingRobokassaFee" class="form-control" />
+                            <span asp-validation-for="IsPayingRobokassaFee" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RobokassaShopId" class="control-label"></label>
+                            <input asp-for="RobokassaShopId" class="form-control" />
+                            <span asp-validation-for="RobokassaShopId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RobokassaPassword1" class="control-label"></label>
+                            <input asp-for="RobokassaPassword1" class="form-control" />
+                            <span asp-validation-for="RobokassaPassword1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RobokassaPassword2" class="control-label"></label>
+                            <input asp-for="RobokassaPassword2" class="form-control" />
+                            <span asp-validation-for="RobokassaPassword2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RobokassaTestPassword1" class="control-label"></label>
+                            <input asp-for="RobokassaTestPassword1" class="form-control" />
+                            <span asp-validation-for="RobokassaTestPassword1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RobokassaTestPassword2" class="control-label"></label>
+                            <input asp-for="RobokassaTestPassword2" class="form-control" />
+                            <span asp-validation-for="RobokassaTestPassword2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="HasContactForm" class="control-label"></label>
+                            <input asp-for="HasContactForm" class="form-control" />
+                            <span asp-validation-for="HasContactForm" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ContactFormHeaderText" class="control-label"></label>
+                            <input asp-for="ContactFormHeaderText" class="form-control" />
+                            <span asp-validation-for="ContactFormHeaderText" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ContactFormButtonText" class="control-label"></label>
+                            <input asp-for="ContactFormButtonText" class="form-control" />
+                            <span asp-validation-for="ContactFormButtonText" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ContactFormMessageBoxText" class="control-label"></label>
+                            <input asp-for="ContactFormMessageBoxText" class="form-control" />
+                            <span asp-validation-for="ContactFormMessageBoxText" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-controller="Dashboard" asp-action="Index">Back to List</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

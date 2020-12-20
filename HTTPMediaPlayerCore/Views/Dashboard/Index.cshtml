@@ -47,14 +47,14 @@
                                 </h6>
                                 <h4 class="card-title">
                                     @*@if (courseAuthor.Course.IsBook != true)
-                                    {*@
-                                        <a href="@(courses[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = courses[i].Id, userId = courses[i].UserId, courseId = courses[i].CourseId }) : "#")">@(courseAuthor.Course.Name)</a>
+                                        {*@
+                                    <a href="@(courses[i].IsActivated == true ? Url.Action("MyCourse", "Dashboard", new { id = courses[i].Id, userId = courses[i].UserId, courseId = courses[i].CourseId }) : "#")">@(courseAuthor.Course.Name)</a>
                                     @*}*@
                                     @*else
-                                    {
+                                        {
 
-                                        <a href="@(courses[i].IsActivated == true ? ("/api/sample/"  + courseAuthor.UserId + "/" + x.UniqueId.ToString()) + "/" + course.AuthorId + "/" + lesson.FileId + "/" + Model.UserId : "#")">@(courseAuthor.Course.Name)</a>
-                                    }*@
+                                            <a href="@(courses[i].IsActivated == true ? ("/api/sample/"  + courseAuthor.UserId + "/" + x.UniqueId.ToString()) + "/" + course.AuthorId + "/" + lesson.FileId + "/" + Model.UserId : "#")">@(courseAuthor.Course.Name)</a>
+                                        }*@
                                 </h4>
                             </div>
                             <div class="card-footer ">
@@ -81,5 +81,14 @@
         </div>
     </div>
 </div>
+
+@section scripts {
+
+    <script>
+        $(document).ready(function () {
+            $("#mycourses").addClass("active");
+        });
+    </script>
+}
 
 

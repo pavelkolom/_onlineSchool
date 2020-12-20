@@ -1,0 +1,180 @@
+﻿@model IEnumerable<HTTPMediaPlayerCore.Models.Author>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AuthorUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkShopName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalPageTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalPageSlogan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalPageHeaderPic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PersonalPageHTML)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instagram)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Facebook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VK)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YouTube)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasOwnRobokassa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsPayingRobokassaFee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RobokassaShopId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RobokassaPassword1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RobokassaPassword2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RobokassaTestPassword1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RobokassaTestPassword2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HasContactForm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactFormHeaderText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactFormButtonText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactFormMessageBoxText)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuthorUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkShopName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalPageTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalPageSlogan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalPageHeaderPic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonalPageHTML)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Filter.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instagram)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Facebook)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VK)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YouTube)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasOwnRobokassa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPayingRobokassaFee)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RobokassaShopId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RobokassaPassword1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RobokassaPassword2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RobokassaTestPassword1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RobokassaTestPassword2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HasContactForm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactFormHeaderText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactFormButtonText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactFormMessageBoxText)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

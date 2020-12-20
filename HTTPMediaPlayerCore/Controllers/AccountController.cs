@@ -285,6 +285,8 @@ namespace HTTPMediaPlayerCore.Controllers
 
             //Session["UserID"] = objUser.id = userobj.Id;
             HttpContext.Session.SetString("UserID", userobj.Id.ToString());
+            
+            HttpContext.Session.SetString("AuthorID", userobj.AuthorID.ToString());
 
             //Session["IsAuthor"] = objUser.isAuthor = userobj.IsAuthor;
             HttpContext.Session.SetString("IsAuthor", userobj.IsAuthor.ToString());

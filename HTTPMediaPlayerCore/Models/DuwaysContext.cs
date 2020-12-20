@@ -127,8 +127,9 @@ namespace HTTPMediaPlayerCore.Models
     [Required]
     [Column(TypeName = "NVARCHAR(50)")]
     public string Email { get; set; }
-    public bool IsAuthor { get; set; }
-    public bool IsAdmin { get; set; }
+    public bool? IsAuthor { get; set; }
+    public int? AuthorID { get; set; }
+    public bool? IsAdmin { get; set; }
     public int? CountryId { get; set; }
     public  Country Country { get; set; }
 
@@ -172,6 +173,9 @@ namespace HTTPMediaPlayerCore.Models
 
   public class Author
   {
+    public Author()
+    { }
+
     private ILazyLoader LazyLoader { get; set; }
 
     public Author(ILazyLoader lazyLoader)
@@ -266,10 +270,10 @@ namespace HTTPMediaPlayerCore.Models
 
     public bool? HasContactForm { get; set; }
 
-    [Column(TypeName = "NVARCHAR(20)")]
+    [Column(TypeName = "NVARCHAR(50)")]
     public string ContactFormHeaderText { get; set; }
 
-    [Column(TypeName = "NVARCHAR(30)")]
+    [Column(TypeName = "NVARCHAR(50)")]
     public string ContactFormButtonText { get; set; }
     
     [Column(TypeName = "NVARCHAR(50)")]
