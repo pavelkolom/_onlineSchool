@@ -15,30 +15,91 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <form asp-action="EditMyAuthorProfile">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="Id" />
-                        <div class="form-group">
-                            <label asp-for="AuthorUrl" class="control-label"></label>
-                            <input asp-for="AuthorUrl" class="form-control" />
-                            <span asp-validation-for="AuthorUrl" class="text-danger"></span>
+                        @*<div class="form-group">
+            <label asp-for="AuthorUrl" class="control-label"></label>
+            <input asp-for="AuthorUrl" class="form-control" />
+            <span asp-validation-for="AuthorUrl" class="text-danger"></span>
+        </div>*@
+
+                        @*<row>
+            <div class="col-lg-3 col-sm-4">
+                <div class="form-group bmd-form-group">
+                    <label for="AuthorUrl" class="bmd-label-floating">Url</label>
+                    @Html.TextBoxFor(a => a.AuthorUrl, new { @class = "form-control", id = "AuthorUrl", @autocomplete = "off" })
+                    <span class="bmd-help">Url вашей мастерской </span>
+                </div>
+            </div>
+        </row>*@
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Url вашей мастерской</label>
+                            <div class="col-sm-10">
+                                <div class="form-group bmd-form-group">
+                                    <label for="AuthorUrl" class="bmd-label-floating">Например: unicorn-library или happy-forest</label>
+                                    @Html.TextBoxFor(a => a.AuthorUrl, new { @class = "form-control", id = "AuthorUrl", @autocomplete = "off" })
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label asp-for="WorkShopName" class="control-label"></label>
-                            <input asp-for="WorkShopName" class="form-control" />
-                            <span asp-validation-for="WorkShopName" class="text-danger"></span>
+                        <div class="row">
+                            <label class="col-sm-2 col-form-label">Url вашей мастерской</label>
+                            <div class="col-sm-10">
+                                <div class="form-group bmd-form-group">
+                                    <label for="AuthorUrl" class="bmd-label-floating">Например: unicorn-library или happy-forest</label>
+                                    @Html.TextBoxFor(a => a.AuthorUrl, new { @class = "form-control", id = "AuthorUrl", @autocomplete = "off" })
+                                </div>
+                            </div>
                         </div>
+
+                        @*<row>
+            <div class="col-lg-3 col-sm-4">
+                <div class="form-group bmd-form-group">
+                    <label for="exampleInput1" class="bmd-label-floating">With Floating Label</label>
+                    <input type="email" class="form-control" id="exampleInput1">
+                    <span class="bmd-help">We'll never share your email with anyone else.</span>
+                </div>
+            </div>
+        </row>*@
+
+
+
+
+
+
+
+                        @*<div class="form-group">
+            <label asp-for="WorkShopName" class="control-label"></label>
+            <input asp-for="WorkShopName" class="form-control" />
+            <span asp-validation-for="WorkShopName" class="text-danger"></span>
+        </div>*@
                         <div class="form-group">
-                            <label asp-for="UserId" class="control-label"></label>
-                            <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                            <span asp-validation-for="UserId" class="text-danger"></span>
+                            <label for="WorkShopName" class="bmd-label-floating">Название</label>
+                            @Html.TextBoxFor(a => a.WorkShopName, new { @class = "form-control", id = "WorkShopName", @autocomplete = "off" })
+                            <span class="bmd-help">Название вашей мастерской </span>
                         </div>
+
+                        @*<div class="form-group">
+            <label asp-for="UserId" class="control-label"></label>
+            <select asp-for="UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+            <span asp-validation-for="UserId" class="text-danger"></span>
+        </div>*@
+
+
+                        @*<div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>*@
+
                         <div class="form-group">
-                            <label asp-for="Title" class="control-label"></label>
-                            <input asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
+                            <label for="Title" class="bmd-label-floating">Title</label>
+                            @Html.TextBoxFor(a => a.Title, new { @class = "form-control", id = "Title", @autocomplete = "off" })
+                            <span class="bmd-help">Название вашей мастерской </span>
                         </div>
+
+
                         <div class="form-group">
                             <label asp-for="Description" class="control-label"></label>
                             <input asp-for="Description" class="form-control" />
